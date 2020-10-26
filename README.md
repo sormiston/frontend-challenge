@@ -1,7 +1,7 @@
 ### Goals
 
-| Task                |  Implementation | Priority
-| ------------------- | :------: | ---------------|
+| Task                |  Implementation | Priority | Done |
+| ------------------- | :------: | ---------------| -----|
 | *Sprint 1*
 | Cannot alter text, only copy/paste/select  |    `<textArea readOnly={!!text}>` |   L 
 | body for POST request  |    Save button tokenizes reducer object as `data` in local storage + "theoretical" ajax post  |  M |
