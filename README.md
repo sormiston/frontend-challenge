@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+### Goals
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| Task                |  Implementation | Priority
+| ------------------- | :------: | ---------------|
+| *Sprint 1*
+| Cannot alter text, only copy/paste/select  |    `<textArea readOnly={!!text}>` |   L 
+| body for POST request  |    Save button tokenizes reducer object as `data` in local storage + "theoretical" ajax post  |  M |
+| initial text state | `useState` initializes to `data`,defaults to empty string | H
+| initial data state |  text attr tracks component state, Tags intialize as []s | H
+| reducer functions | reusable add Tag function; SAVE button | H
+| tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
+    
 
-## Available Scripts
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+### Data scheme:
+```json
+const data = {
+  "text": "...full text",
+  "tags": {
+    "Person": [
+      {
+        "start": <start_index>,
+        "end": <end_index>
+      }
+    ]
+  }
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### State
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+#### Component Tree
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> Use this section to display the structure of how your React components are being rendered. This should show the parent to child relation between you components. In other words, show which components are rendering the other components. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Component Hierarchy
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> Use this section to define your React components and the data architecture of your app. This should be a reflection of how you expect your directory/file tree to look like. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+``` structure
 
-## Learn More
+src
+|__ assets/
+      |__ fonts
+      |__ graphics
+      |__ images
+      |__ mockups
+|__ components/
+      |__ Header.jsx
+|__ services/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Component Breakdown
 
-### Code Splitting
+> Use this section to go into further depth regarding your components, including breaking down the components as stateless or stateful, and considering the passing of data between those components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+|  Component   |    Type    | state | props | Description                                                      |
+| :----------: | :--------: | :---: | :---: | :--------------------------------------------------------------- |
+|    Header    | functional |   n   |   n   | _The header will contain the navigation and logo._               |
+|  Navigation  | functional |   n   |   n   | _The navigation will provide a link to each of the pages._       |
+|   Gallery    |   class    |   y   |   n   | _The gallery will render the posts using cards in flexbox._      |
+| Gallery Card | functional |   n   |   y   | _The cards will render the post info via props._                 |
+|    Footer    | functional |   n   |   n   | _The footer will show info about me and a link to my portfolio._ |
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
