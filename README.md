@@ -1,14 +1,21 @@
 ### Goals
-
 | Task                |  Implementation | Priority | Done |
 | ------------------- | :------: | ---------------| -----|
 | *Sprint 1*
-| Cannot alter text, only copy/paste/select  |    `<textArea readOnly={!!text}>` |   L 
-| body for POST request  |    Save button tokenizes reducer object as `data` in local storage + "theoretical" ajax post  |  M |
-| initial text state | `useState` initializes to `data`,defaults to empty string | H
-| initial data state |  text attr tracks component state, Tags intialize as []s | H
-| reducer functions | reusable add Tag function; SAVE button | H
+| Functioning textarea |  | H |  |
+| Cannot alter text, only copy/paste/select/clear  |    `<textArea readOnly={!!text}>` |   L 
+| initial text state | `useState` initializes to `data`,defaults to empty string | H | OK
+| initial data state |  text attr tracks component state, Tags intialize as []s | H | OK
+| Reducer Function New text ( + cache) |    | H |
+| Reducer Function add tag ( + cache) |      | H |
+| Reducer Function Save to DB (+ clear) | theoretical ajax POST   | H |
+| Cache function |                        |   | H |
+| Clear function |                      |     | L |
 | tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
+| *Sprint 2* |
+| Define caching flow w/ local storage   |    |   |   |
+| *Sprint 3* |
+| Intercept clears or pastes with chance to save  |    |  L |   |
     
 
 
