@@ -6,11 +6,11 @@
 | Cannot alter text, only copy/paste/select/clear  |    `<textArea readOnly={!!text}>` |   L 
 | initial text state | `useState` initializes to `data`,defaults to empty string | H | OK
 | initial data state |  text attr tracks component state, Tags intialize as []s | H | OK
-| Reducer Function New text ( + cache) |    | H |
+| Reducer Function merge text ( + cache) |    | H |
 | Reducer Function add tag ( + cache) |      | H |
 | Reducer Function Save to DB (+ clear) | theoretical ajax POST   | H |
 | Cache function |                        |   | H |
-| Clear function |                      |     | L |
+| Clear/New function |                      |     | M |
 | tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
 | *Sprint 2* |
 | Define caching flow w/ local storage   |    |   |   |
@@ -18,7 +18,8 @@
 | Intercept clears or pastes with chance to save  |    |  L |   |
     
 
-
+### Sprint 1 changelog:
++ 6:03 attempting to apply updated text area to reducer via useEffect
 <br>
 
 ### Data scheme:

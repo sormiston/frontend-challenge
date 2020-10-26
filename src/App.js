@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 
 const ACTIONS = Object.freeze({
   NEW: 'new',
@@ -12,7 +12,8 @@ const ACTIONS = Object.freeze({
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.NEW:
-      return
+      // console.log(action.payload)
+      return 
     case ACTIONS.ADD_TAG:
       return
     case ACTIONS.SAVE:
@@ -43,20 +44,24 @@ function App() {
     : dataScheme
   
   const [data, dispatch] = useReducer(reducer, initialState)
-  const [text, setText] = useState(data.text)
+  const [text, setText] = useState(initialState.text)
 
   function handleClear(e) {
     if (e.keyCode === 8) {
       // dispatch to reset + cache
     }
   }
+
     return (
       <div className='App'>
         <textarea
-          readOnly={!!text}
+          // readOnly={!!text}
           rows={20}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={data}
+          onChange={(e) => {
+            setText(e.target.value)
+            
+          } }
           onKeyDown={(e) => handleClear(e)}
         />
       </div>
