@@ -43,6 +43,7 @@
 | Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
 | Intercept clears or pastes with chance to save | | L | |
 | Disable possibility to annotate word fragment | helper algo | M | |
+| refactor text state into reducer |  | L
 
 <br>
 
