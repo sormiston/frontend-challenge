@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useRef} from 'react'
 import TagButton from './TagButton'
 
 export const ACTIONS = Object.freeze({
@@ -25,9 +25,7 @@ const dataScheme = {
     Event: [],
   },
 }
-export const textArea = document.querySelector('textarea')
 
-  
 function reducer(state, action) {
   let newState = {}
   switch (action.type) {
@@ -76,6 +74,8 @@ function App() {
 
   const [data, dispatch] = useReducer(reducer, initialState)
   const [text, setText] = useState(initialState.text)
+  
+  const textAreaRef = useRef(null)
 
   function handleClear(e) {
     if (e.keyCode === 8) {
@@ -84,11 +84,14 @@ function App() {
     }
   }
   
-  console.log(textArea)
+  function handleSelect(e) {
+    console.log(e.target.selectionStart)
+  }
 
   return (
     <div className='App'>
       <textarea
+        ref={textAreaRef}
         readOnly={!!text}
         rows={20}
         value={text}
@@ -100,6 +103,7 @@ function App() {
           })
         }}
         onKeyDown={(e) => handleClear(e)}
+        onSelect={(e) => handleSelect(e)}
       />
       <TagButton tag={TAGS.PERSON} dispatch={dispatch} />
       <button

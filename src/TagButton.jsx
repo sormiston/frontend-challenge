@@ -1,7 +1,8 @@
 import React from 'react'
 import { ACTIONS } from './App'
+
 export default function TagButton({ tag, dispatch }) {
- 
+  console.log('button renders')
   return (
     
       <button
