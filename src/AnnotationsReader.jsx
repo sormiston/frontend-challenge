@@ -3,11 +3,26 @@ import ExcerptCard from './ExcerptCard'
 import uuid from 'react-uuid'
 
 export default function AnnotationsReader({ data }) {
-  // extract tag arrays from data object - POPE
   
+  const tags = Object.keys(data.tags)
+
   return (
     <div>
-      {data.tags.Person.map(({ start, end }, key) => {
+      {tags.map((tag) => {
+        return data.tags[tag].map(({ start, end }) => {
+          return (
+            <ExcerptCard
+              key={uuid()}
+              tag={tag}
+              text={data.text.substring(start, end)}
+              start={start}
+              end={end}
+            />
+          )
+        })
+      })}
+
+      {/* {data.tags.Person.map(({ start, end }, key) => {
         return (
           <ExcerptCard
             key={uuid()}
@@ -16,7 +31,7 @@ export default function AnnotationsReader({ data }) {
             end={end}
           />
         )
-      })}
+      })} */}
     </div>
   )
 }

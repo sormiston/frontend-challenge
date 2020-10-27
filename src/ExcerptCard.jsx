@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function ExcerptCard({ text, start, end }) {
+export default function ExcerptCard({ tag, text, start, end }) {
   return (
     <div className='card'>
       <header className='card-header'>
-        <p className='card-header-title'>Component</p>
+        <p className='card-header-title'>{tag}</p>
         <a
           href='#'
           className='card-header-icon'
