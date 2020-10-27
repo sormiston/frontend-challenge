@@ -40,10 +40,7 @@
 | Task | Implementation | Priority | Done |
 | ------------- | :------------: | -------- | ---- |
 | _Sprint 3_ |
-| *Popup annotator* | + split text area component <br/> + change `<textarea>` to `<p>` and check for functional equivalency <br /> + | H |
-| 
-| 
-
+| *Popup annotator* | + split text area component <br/> + change `<textarea>` to `<p>` and check for functional equivalency <br />  | H | OK
 | Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
 | Intercept clears or pastes with chance to save | | L | |
 | Disable possibility to annotate word fragment | helper algo | M | |

@@ -106,14 +106,10 @@ function App() {
   }, [indices])
 
   function handleClear(e) {
-    if (e.keyCode === 8) {
-      if (
-        window.confirm('Are you sure you want to clear this text?')
-      ) {
-        setText('')
-        localStorage.removeItem('data')
-        dispatch({ type: ACTIONS.CLEAR })
-      }
+    if (window.confirm('Are you sure you want to clear this text?')) {
+      setText('')
+      localStorage.removeItem('data')
+      dispatch({ type: ACTIONS.CLEAR })
     }
   }
 
@@ -150,7 +146,7 @@ function App() {
           />
         ) : (
           <textarea
-              className='textarea has-fixed-size'
+            className='textarea has-fixed-size'
             onChange={(e) => {
               setText(e.target.value)
               dispatch({
