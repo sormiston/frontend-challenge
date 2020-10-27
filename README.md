@@ -23,7 +23,7 @@
 ### Task Manager: _Sprint 2_
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
-| Layout Basic     |  ~20% sidebar as annotations dash | H
+| Layout Basic     |  ~20% sidebar as annotations dash | H | OK
 |  Card subcomponents design | pen and paper; include delete button, index nums (5 minutes!)  | M
 | Card subcomponents implementation |  | H
 | Annotations reader w/ filter tabs |  | M
@@ -51,7 +51,10 @@
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
 | _Sprint 4_ |
-| Dot indicator on lines with annotations |
+| Dot indicator on lines with annotations | L
+| Resizable text port | L
+| Color indications on textbox to indicate ready/text locked |
+
 
 ### Observations
 

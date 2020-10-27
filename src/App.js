@@ -113,10 +113,10 @@ function App() {
       <Layout>
         <textarea
           id='editor'
-          className='textarea has-fixed-size'
+          className='textarea'
           readOnly={!!text}
           rows={20}
-          cols={20}
+          // cols={75}
           value={text}
           onChange={(e) => {
             setText(e.target.value)
@@ -128,7 +128,7 @@ function App() {
           onKeyDown={(e) => handleClear(e)}
           onSelect={(e) => handleSelect(e)}
         />
-
+        <button className="button" onClick={save}>SAVE</button>
         <TagButton
           tag={TAGS.PERSON}
           dispatch={dispatch}
@@ -149,7 +149,6 @@ function App() {
           dispatch={dispatch}
           indices={indices}
         />
-        <button onClick={save}>SAVE</button>
       </Layout>
     </div>
   )

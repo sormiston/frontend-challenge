@@ -5,7 +5,8 @@ export default function TagButton({ tag, dispatch, indices }) {
   
   return (
     
-      <button
+    <button
+      className="button ml-3"
       onClick={(e) => {
         
           dispatch({

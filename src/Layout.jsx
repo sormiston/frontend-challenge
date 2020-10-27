@@ -3,26 +3,47 @@ import styled from 'styled-components'
 
 const Main = styled.main`
 height: inherit;
+display: flex;
 
-#text-viewport {
+#text-section {
   height: inherit;
-  background-color: red;
+  /* background-color: red; */
+  display: flex;
+  flex-flow: column;
+  
   #editor {
     max-width: revert;
     min-width: revert;
     width: revert;
   }
 }
+
+#annotate-section {
+  flex-grow: 1
+}
 `
 
 export default function Layout(props) {
+  console.log(props.children)
   return (
     <Main>
-      <section className="section" id="text-viewport">
-        {props.children}
+      <section className="section has-background-primary" id="text-section">
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">
+              {props.children[1]}
+            </div>
+          </div>
+          <div className="level-right">
+            <div className="level-item">
+              {props.children.slice(2)}
+            </div>
+          </div>
+        </div>
+        {props.children[0]}
       </section>
-      <section className="section" id="annotate-viewport">
-        
+      <section className="section" id="annotate-section">
+       Excerpts
       </section>
     </Main>
   )
