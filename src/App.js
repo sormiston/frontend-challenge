@@ -1,6 +1,8 @@
 import React, { useReducer, useState, useEffect } from 'react'
+import uuid from 'react-uuid'
 import TagButton from './TagButton'
 import Layout from './Layout'
+import AnnotationsReader from './AnnotationsReader'
 
 export const ACTIONS = Object.freeze({
   MERGE_TEXT: 'merge_text',
@@ -128,27 +130,21 @@ function App() {
           onKeyDown={(e) => handleClear(e)}
           onSelect={(e) => handleSelect(e)}
         />
-        <button className="button" onClick={save}>SAVE</button>
-        <TagButton
-          tag={TAGS.PERSON}
-          dispatch={dispatch}
-          indices={indices}
-        />
-        <TagButton
-          tag={TAGS.ORG}
-          dispatch={dispatch}
-          indices={indices}
-        />
-        <TagButton
-          tag={TAGS.PLACE}
-          dispatch={dispatch}
-          indices={indices}
-        />
-        <TagButton
-          tag={TAGS.EVENT}
-          dispatch={dispatch}
-          indices={indices}
-        />
+        <button className='button' onClick={save}>
+          SAVE
+        </button>
+
+        {Object.keys(TAGS).map((k) => (
+          <TagButton
+            key={uuid()}
+            tag={TAGS[k]}
+            dispatch={dispatch}
+            indices={indices}
+            selectionValid={selectionValid}
+          />
+        ))}
+
+        <AnnotationsReader data={data} />
       </Layout>
     </div>
   )

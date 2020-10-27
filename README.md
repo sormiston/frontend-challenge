@@ -24,11 +24,11 @@
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
 | Layout Basic     |  ~20% sidebar as annotations dash | H | OK
-|  Card subcomponents design | pen and paper; include delete button, index nums (5 minutes!)  | M
-| Card subcomponents implementation |  | H
+|  Card subcomponents design | pen and paper; include delete button, index nums (5 minutes!)  | M | OK
+| Card subcomponents implementation | pass data to `annotationsReader`; `annotationsReader` must implement algo to build array of excerpts and print this as map of cards| H
 | Annotations reader w/ filter tabs |  | M
 | Filter Functionality | AnnotationsReader.jsx - filter tabs connected to state variable + state variable is filter term for .map render | M 
-| Buttons "come alive" with valid text selection / otherwise disabled | `<TagButton>` components sunshine under `selectionValid` state | L  |
+| Buttons "come alive" with valid text selection / otherwise disabled | `<TagButton>` components sunshine under `selectionValid` state | L  | OK
 
 <br />
 
@@ -44,6 +44,7 @@
 | Intercept clears or pastes with chance to save | | L | |
 | Disable possibility to annotate word fragment | helper algo | M | |
 | refactor text state into reducer |  | L
+| investigate if useContext can help share state |
 
 <br>
 

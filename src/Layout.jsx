@@ -36,14 +36,14 @@ export default function Layout(props) {
           </div>
           <div className="level-right">
             <div className="level-item">
-              {props.children.slice(2)}
+              {props.children[2]}
             </div>
           </div>
         </div>
         {props.children[0]}
       </section>
       <section className="section" id="annotate-section">
-       Excerpts
+          {props.children[3]}
       </section>
     </Main>
   )
