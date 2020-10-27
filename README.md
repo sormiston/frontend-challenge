@@ -10,12 +10,12 @@
 | Reducer Function merge text ( + cache) | | H | OK
 | Reducer Function add tag ( + cache) | | H |
 | Reducer Function Save to DB (+ clear) | theoretical ajax POST | H |
-| Cache function | | H | |
-| Clear/New function | | | OK |
+| Cache function | | H |  OK
+| Clear/New function | M |  OK |
 | tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
-| Persist state of selected text | `useState` |
+| Persist state of selected text | `onSelect` event + handler + `useState` | | OK
 | _Sprint 2_ |
-| Define caching flow w/ local storage | | | |
+| Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
 | _Sprint 3_ |
 | Intercept clears or pastes with chance to save | | L | |
 

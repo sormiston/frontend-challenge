@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useRef} from 'react'
+import React, { useReducer, useState } from 'react'
 import TagButton from './TagButton'
 
 export const ACTIONS = Object.freeze({
@@ -13,7 +13,7 @@ export const TAGS = Object.freeze({
   PERSON: 'Person',
   ORG: 'Organization',
   PLACE: 'Place',
-  EVENT: 'Event'
+  EVENT: 'Event',
 })
 
 const dataScheme = {
@@ -36,22 +36,24 @@ function reducer(state, action) {
       }
       cacheData(newState)
       return newState
-      
+
     case ACTIONS.ADD_TAG:
       const newTagArray = [
         ...state.tags[action.payload.tag],
-        action.payload.span
+        action.payload.span,
       ]
-      
+
       newState = {
         ...state,
         tags: {
           ...state.tags,
-          Person: newTagArray,
+          [action.payload.tag]: newTagArray,
         },
       }
+    
+      cacheData(newState)
       return newState
-      
+
     case ACTIONS.SAVE:
       // clear cache
       return
@@ -74,8 +76,7 @@ function App() {
 
   const [data, dispatch] = useReducer(reducer, initialState)
   const [text, setText] = useState(initialState.text)
-  
-  const textAreaRef = useRef(null)
+  const [indices, setIndices] = useState(null)
 
   function handleClear(e) {
     if (e.keyCode === 8) {
@@ -83,15 +84,17 @@ function App() {
       dispatch({ type: ACTIONS.CLEAR })
     }
   }
-  
+
   function handleSelect(e) {
-    console.log(e.target.selectionStart)
+    setIndices({
+      start: e.target.selectionStart,
+      end: e.target.selectionEnd,
+    })
   }
 
   return (
     <div className='App'>
       <textarea
-        ref={textAreaRef}
         readOnly={!!text}
         rows={20}
         value={text}
@@ -105,49 +108,26 @@ function App() {
         onKeyDown={(e) => handleClear(e)}
         onSelect={(e) => handleSelect(e)}
       />
-      <TagButton tag={TAGS.PERSON} dispatch={dispatch} />
-      <button
-        id='Person'
-        onClick={(e) => {
-          dispatch({
-            type: ACTIONS.ADD_TAG,
-            payload: {
-              tag: e.target.id,
-              span: { s: 1, e: 2 },
-            },
-          })
-        }}
-      >
-        Person
-      </button>
-      <button
-        id='Person'
-        onClick={(e) => {
-          dispatch({
-            type: ACTIONS.ADD_TAG,
-            payload: {
-              tag: e.target.id,
-              span: { s: 1, e: 2 },
-            },
-          })
-        }}
-      >
-        Person
-      </button>
-      <button
-        id='Person'
-        onClick={(e) => {
-          dispatch({
-            type: ACTIONS.ADD_TAG,
-            payload: {
-              tag: e.target.id,
-              span: { s: 1, e: 2 },
-            },
-          })
-        }}
-      >
-        Person
-      </button>
+      <TagButton
+        tag={TAGS.PERSON}
+        dispatch={dispatch}
+        indices={indices}
+      />
+       <TagButton
+        tag={TAGS.ORG}
+        dispatch={dispatch}
+        indices={indices}
+      />
+      <TagButton
+        tag={TAGS.PLACE}
+        dispatch={dispatch}
+        indices={indices}
+      />
+      <TagButton
+        tag={TAGS.EVENT}
+        dispatch={dispatch}
+        indices={indices}
+      />
     </div>
   )
 }
