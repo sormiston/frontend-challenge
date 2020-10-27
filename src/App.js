@@ -1,32 +1,20 @@
-import React, { useReducer, useState, useEffect } from 'react'
+import React, { useReducer, useState } from 'react'
+import TagButton from './TagButton'
 
-const ACTIONS = Object.freeze({
-  NEW: 'new',
+export const ACTIONS = Object.freeze({
+  MERGE_TEXT: 'merge_text',
   ADD_TAG: 'add_tag',
   SAVE: 'save',
   CACHE: 'cache',
-  CLEAR: 'clear'
+  CLEAR: 'clear',
 })
 
-
-function reducer(state, action) {
-  switch (action.type) {
-    case ACTIONS.NEW:
-      // console.log(action.payload)
-      return 
-    case ACTIONS.ADD_TAG:
-      return
-    case ACTIONS.SAVE:
-      return
-    case ACTIONS.CACHE:
-      return
-    case ACTIONS.CLEAR:
-      return
-    default:
-      return
-  }
-
-}
+export const TAGS = Object.freeze({
+  PERSON: 'Person',
+  ORG: 'Organization',
+  PLACE: 'Place',
+  EVENT: 'Event'
+})
 
 const dataScheme = {
   text: '',
@@ -37,35 +25,127 @@ const dataScheme = {
     Event: [],
   },
 }
+export const textArea = document.querySelector('textarea')
 
+  
+function reducer(state, action) {
+  let newState = {}
+  switch (action.type) {
+    case ACTIONS.MERGE_TEXT:
+      newState = {
+        ...state,
+        text: action.payload,
+      }
+      cacheData(newState)
+      return newState
+      
+    case ACTIONS.ADD_TAG:
+      const newTagArray = [
+        ...state.tags[action.payload.tag],
+        action.payload.span
+      ]
+      
+      newState = {
+        ...state,
+        tags: {
+          ...state.tags,
+          Person: newTagArray,
+        },
+      }
+      return newState
+      
+    case ACTIONS.SAVE:
+      // clear cache
+      return
+    case ACTIONS.CLEAR:
+      return dataScheme
+    default:
+      return
+  }
+}
+
+function cacheData(data) {
+  localStorage.setItem('data', JSON.stringify(data))
+}
+
+// REACT COMPONENT
 function App() {
   const initialState = localStorage.getItem('data')
     ? JSON.parse(localStorage.getItem('data'))
     : dataScheme
-  
+
   const [data, dispatch] = useReducer(reducer, initialState)
   const [text, setText] = useState(initialState.text)
 
   function handleClear(e) {
     if (e.keyCode === 8) {
-      // dispatch to reset + cache
+      setText('')
+      dispatch({ type: ACTIONS.CLEAR })
     }
   }
+  
+  console.log(textArea)
 
-    return (
-      <div className='App'>
-        <textarea
-          // readOnly={!!text}
-          rows={20}
-          value={data}
-          onChange={(e) => {
-            setText(e.target.value)
-            
-          } }
-          onKeyDown={(e) => handleClear(e)}
-        />
-      </div>
-    )
+  return (
+    <div className='App'>
+      <textarea
+        readOnly={!!text}
+        rows={20}
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value)
+          dispatch({
+            type: ACTIONS.MERGE_TEXT,
+            payload: e.target.value,
+          })
+        }}
+        onKeyDown={(e) => handleClear(e)}
+      />
+      <TagButton tag={TAGS.PERSON} dispatch={dispatch} />
+      <button
+        id='Person'
+        onClick={(e) => {
+          dispatch({
+            type: ACTIONS.ADD_TAG,
+            payload: {
+              tag: e.target.id,
+              span: { s: 1, e: 2 },
+            },
+          })
+        }}
+      >
+        Person
+      </button>
+      <button
+        id='Person'
+        onClick={(e) => {
+          dispatch({
+            type: ACTIONS.ADD_TAG,
+            payload: {
+              tag: e.target.id,
+              span: { s: 1, e: 2 },
+            },
+          })
+        }}
+      >
+        Person
+      </button>
+      <button
+        id='Person'
+        onClick={(e) => {
+          dispatch({
+            type: ACTIONS.ADD_TAG,
+            payload: {
+              tag: e.target.id,
+              span: { s: 1, e: 2 },
+            },
+          })
+        }}
+      >
+        Person
+      </button>
+    </div>
+  )
 }
 
 export default App
