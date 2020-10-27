@@ -47,6 +47,12 @@
 
 <br>
 
+### Task Manager: _Sprint 4_
+| Task | Implementation | Priority | Done |
+| ---- | :------------: | -------- | ---- |
+| _Sprint 4_ |
+| Dot indicator on lines with annotations |
+
 ### Observations
 
 ### Data scheme:

@@ -1,5 +1,6 @@
 import React, { useReducer, useState, useEffect } from 'react'
 import TagButton from './TagButton'
+import Layout from './Layout'
 
 export const ACTIONS = Object.freeze({
   MERGE_TEXT: 'merge_text',
@@ -49,7 +50,7 @@ function reducer(state, action) {
           [action.payload.tag]: newTagArray,
         },
       }
-    
+
       cacheData(newState)
       return newState
 
@@ -74,7 +75,7 @@ function App() {
   const [text, setText] = useState(data.text)
   const [indices, setIndices] = useState({
     start: null,
-    end: null
+    end: null,
   })
   const [selectionValid, setSelectionValid] = useState(false)
 
@@ -85,7 +86,7 @@ function App() {
       setSelectionValid(false)
     }
   }, [indices])
-  
+
   function handleClear(e) {
     if (e.keyCode === 8) {
       setText('')
@@ -99,52 +100,57 @@ function App() {
       end: e.target.selectionEnd,
     })
   }
-  
+
   function save() {
     alert(`POST request --  \n ${JSON.stringify(data, null, 2)}`)
     localStorage.removeItem('data')
     setText('')
-    dispatch({type: ACTIONS.CLEAR })
-    
+    dispatch({ type: ACTIONS.CLEAR })
   }
 
   return (
     <div className='App'>
-      <textarea
-        readOnly={!!text}
-        rows={20}
-        value={text}
-        onChange={(e) => {
-          setText(e.target.value)
-          dispatch({
-            type: ACTIONS.MERGE_TEXT,
-            payload: e.target.value,
-          })
-        }}
-        onKeyDown={(e) => handleClear(e)}
-        onSelect={(e) => handleSelect(e)}
-      />
-      <TagButton
-        tag={TAGS.PERSON}
-        dispatch={dispatch}
-        indices={indices}
-      />
-       <TagButton
-        tag={TAGS.ORG}
-        dispatch={dispatch}
-        indices={indices}
-      />
-      <TagButton
-        tag={TAGS.PLACE}
-        dispatch={dispatch}
-        indices={indices}
-      />
-      <TagButton
-        tag={TAGS.EVENT}
-        dispatch={dispatch}
-        indices={indices}
-      />
-      <button onClick={save}>SAVE</button>
+      <Layout>
+        <textarea
+          id='editor'
+          className='textarea has-fixed-size'
+          readOnly={!!text}
+          rows={20}
+          cols={20}
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value)
+            dispatch({
+              type: ACTIONS.MERGE_TEXT,
+              payload: e.target.value,
+            })
+          }}
+          onKeyDown={(e) => handleClear(e)}
+          onSelect={(e) => handleSelect(e)}
+        />
+
+        <TagButton
+          tag={TAGS.PERSON}
+          dispatch={dispatch}
+          indices={indices}
+        />
+        <TagButton
+          tag={TAGS.ORG}
+          dispatch={dispatch}
+          indices={indices}
+        />
+        <TagButton
+          tag={TAGS.PLACE}
+          dispatch={dispatch}
+          indices={indices}
+        />
+        <TagButton
+          tag={TAGS.EVENT}
+          dispatch={dispatch}
+          indices={indices}
+        />
+        <button onClick={save}>SAVE</button>
+      </Layout>
     </div>
   )
 }
