@@ -3,6 +3,7 @@ import uuid from 'react-uuid'
 import TagButton from './TagButton'
 import Layout from './Layout'
 import AnnotationsReader from './AnnotationsReader'
+import TextEditor from './TextEditor'
 
 export const ACTIONS = Object.freeze({
   MERGE_TEXT: 'merge_text',
@@ -106,7 +107,9 @@ function App() {
 
   function handleClear(e) {
     if (e.keyCode === 8) {
-      if (window.confirm("Are you sure you want to clear this text?")) {
+      if (
+        window.confirm('Are you sure you want to clear this text?')
+      ) {
         setText('')
         localStorage.removeItem('data')
         dispatch({ type: ACTIONS.CLEAR })
@@ -131,24 +134,33 @@ function App() {
   return (
     <div className='App'>
       <Layout>
-        <textarea
-          id='editor'
-          className='textarea'
-          readOnly={!!text}
-          rows={20}
-          cols={75}
-          value={text}
-          onChange={(e) => {
-            setText(e.target.value)
-            dispatch({
-              type: ACTIONS.MERGE_TEXT,
-              payload: e.target.value,
-            })
-          }}
-          onKeyDown={(e) => handleClear(e)}
-          onSelect={(e) => handleSelect(e)}
-          
-        />
+        {!!text ? (
+          <TextEditor
+            // readOnly={!!text}
+            text={text}
+            // onChange={(e) => {
+            //   setText(e.target.value)
+            //   dispatch({
+            //     type: ACTIONS.MERGE_TEXT,
+            //     payload: e.target.value,
+            //   })
+            // }}
+            handleClear={handleClear}
+            onSelect={(e) => handleSelect(e)}
+          />
+        ) : (
+          <textarea
+              className='textarea has-fixed-size'
+            onChange={(e) => {
+              setText(e.target.value)
+              dispatch({
+                type: ACTIONS.MERGE_TEXT,
+                payload: e.target.value,
+              })
+            }}
+          />
+        )}
+
         <button className='button' onClick={save}>
           SAVE
         </button>

@@ -7704,3 +7704,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 html, body, #root, .App {
   height: 100%; }
+
+textarea.textarea {
+  border: none; }

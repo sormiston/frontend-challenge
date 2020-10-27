@@ -10,6 +10,7 @@ display: flex;
   /* background-color: red; */
   display: flex;
   flex-flow: column;
+  width: 60%;
   
   #editor {
     max-width: revert;
