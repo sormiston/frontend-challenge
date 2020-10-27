@@ -29,7 +29,7 @@ export default function Layout(props) {
   console.log(props.children)
   return (
     <Main>
-      <section className="section has-background-primary" id="text-section">
+      <section className="section has-background-light" id="text-section">
         <div className="level">
           <div className="level-left">
             <div className="level-item">

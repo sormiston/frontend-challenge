@@ -25,7 +25,7 @@
 | ---- | :------------: | -------- | ---- |
 | Layout Basic     |  ~20% sidebar as annotations dash | H | OK
 |  Card subcomponents design | pen and paper; include delete button, index nums (5 minutes!)  | M | OK
-| Card subcomponents implementation | pass data to `annotationsReader`; `annotationsReader` must implement algo to build array of excerpts and print this as map of cards| H
+| Card subcomponents implementation | pass data to `annotationsReader`; `annotationsReader` must implement algo to build array of excerpts and print this as map of cards| M | OK
 | Annotations reader w/ filter tabs |  | M
 | Filter Functionality | AnnotationsReader.jsx - filter tabs connected to state variable + state variable is filter term for .map render | M 
 | Buttons "come alive" with valid text selection / otherwise disabled | `<TagButton>` components sunshine under `selectionValid` state | L  | OK

@@ -18,6 +18,21 @@ export const TAGS = Object.freeze({
   EVENT: 'Event',
 })
 
+export function color(tag) {
+  switch (tag) {
+    case TAGS.PERSON:
+      return 'is-primary'
+    case TAGS.ORG:
+      return 'is-link'
+    case TAGS.PLACE:
+      return 'is-warning'
+    case TAGS.EVENT:
+      return 'is-danger'
+    default:
+      return ''
+  }
+}
+
 const dataScheme = {
   text: '',
   tags: {
