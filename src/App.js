@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 import TagButton from './TagButton'
 
 export const ACTIONS = Object.freeze({
@@ -72,8 +72,20 @@ function App() {
 
   const [data, dispatch] = useReducer(reducer, initialState)
   const [text, setText] = useState(data.text)
-  const [indices, setIndices] = useState(null)
+  const [indices, setIndices] = useState({
+    start: null,
+    end: null
+  })
+  const [selectionValid, setSelectionValid] = useState(false)
 
+  useEffect(() => {
+    if (indices.start !== null && indices.start !== indices.end) {
+      setSelectionValid(true)
+    } else {
+      setSelectionValid(false)
+    }
+  }, [indices])
+  
   function handleClear(e) {
     if (e.keyCode === 8) {
       setText('')

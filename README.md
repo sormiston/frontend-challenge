@@ -9,25 +9,45 @@
 | Update Text attr of state on Paste ( + cache) | see MERGE_TEXT action in reducer| H | OK
 | Add Tags ( + cache) | reducer: see ADD_TAG | H | OK
 |
-| Reducer Function Save to DB (+ clear) | theoretical ajax POST | H |
+| Reducer Function Save to DB (+ clear) | theoretical ajax POST | H | OK
 | Cache helper function | | H |  OK
 | Clear/New function | | M |  OK |
 | tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
 | Persist state of selected text | `onSelect` event + handler + `useState` | | OK 
+<br />
+
 ---
+
+<br />
 
 ### Task Manager: _Sprint 2_
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
-| Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
-| Buttons "come alive" when text is selected |   |   |
+| Layout Basic     |  ~20% sidebar as annotations dash | H
+|  Card subcomponents design | pen and paper; include delete button, index nums (5 minutes!)  | M
+| Card subcomponents implementation |  | H
+| Annotations reader w/ filter tabs |  | M
+| Filter Functionality | AnnotationsReader.jsx - filter tabs connected to state variable + state variable is filter term for .map render | M 
+| Buttons "come alive" with valid text selection / otherwise disabled | `<TagButton>` components sunshine under `selectionValid` state | L  |
+
+<br />
+
+---
+
+<br />
+
+### Task Manager: _Sprint 3_
+| Task | Implementation | Priority | Done |
+| ---- | :------------: | -------- | ---- |
 | _Sprint 3_ |
+| Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
 | Intercept clears or pastes with chance to save | | L | |
+| Disable possibility to annotate word fragment | helper algo | M | |
 
 <br>
+
 ### Observations
-#### Sprint 1
-+ After a paste event, a "selection" will exist at the final string index.  
+
 ### Data scheme:
 
 ```json
@@ -44,12 +64,12 @@ const data = {
 }
 ```
 
-#### State
+### State
 
 <br>
 
 
-#### Component Tree
+### Component Tree
 
 > Use this section to display the structure of how your React components are being rendered. This should show the parent to child relation between you components. In other words, show which components are rendering the other components.
 
