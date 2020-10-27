@@ -1,26 +1,33 @@
-### Goals
 
+### Task Manager: _Sprint 1_
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
-| _Sprint 1_
 | Functioning textarea | | H | OK |
 | Cannot alter text, only copy/paste/select/clear | `<textArea readOnly={!!text}>` | L | OK
 | initial text state | `useState` initializes to `data`,defaults to empty string | H | OK
 | initial data state | text attr tracks component state, Tags intialize as []s | H | OK
-| Reducer Function merge text ( + cache) | | H | OK
-| Reducer Function add tag ( + cache) | | H |
+| Update Text attr of state on Paste ( + cache) | see MERGE_TEXT action in reducer| H | OK
+| Add Tags ( + cache) | reducer: see ADD_TAG | H | OK
+|
 | Reducer Function Save to DB (+ clear) | theoretical ajax POST | H |
-| Cache function | | H |  OK
-| Clear/New function | M |  OK |
+| Cache helper function | | H |  OK
+| Clear/New function | | M |  OK |
 | tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
-| Persist state of selected text | `onSelect` event + handler + `useState` | | OK
-| _Sprint 2_ |
+| Persist state of selected text | `onSelect` event + handler + `useState` | | OK 
+---
+
+### Task Manager: _Sprint 2_
+| Task | Implementation | Priority | Done |
+| ---- | :------------: | -------- | ---- |
 | Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
+| Buttons "come alive" when text is selected |   |   |
 | _Sprint 3_ |
 | Intercept clears or pastes with chance to save | | L | |
 
 <br>
-
+### Observations
+#### Sprint 1
++ After a paste event, a "selection" will exist at the final string index.  
 ### Data scheme:
 
 ```json
@@ -37,9 +44,10 @@ const data = {
 }
 ```
 
-### State
+#### State
 
 <br>
+
 
 #### Component Tree
 

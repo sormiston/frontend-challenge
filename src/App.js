@@ -4,7 +4,6 @@ import TagButton from './TagButton'
 export const ACTIONS = Object.freeze({
   MERGE_TEXT: 'merge_text',
   ADD_TAG: 'add_tag',
-  SAVE: 'save',
   CACHE: 'cache',
   CLEAR: 'clear',
 })
@@ -54,9 +53,6 @@ function reducer(state, action) {
       cacheData(newState)
       return newState
 
-    case ACTIONS.SAVE:
-      // clear cache
-      return
     case ACTIONS.CLEAR:
       return dataScheme
     default:
@@ -75,7 +71,7 @@ function App() {
     : dataScheme
 
   const [data, dispatch] = useReducer(reducer, initialState)
-  const [text, setText] = useState(initialState.text)
+  const [text, setText] = useState(data.text)
   const [indices, setIndices] = useState(null)
 
   function handleClear(e) {
@@ -90,6 +86,14 @@ function App() {
       start: e.target.selectionStart,
       end: e.target.selectionEnd,
     })
+  }
+  
+  function save() {
+    alert(`POST request --  \n ${JSON.stringify(data, null, 2)}`)
+    localStorage.removeItem('data')
+    setText('')
+    dispatch({type: ACTIONS.CLEAR })
+    
   }
 
   return (
@@ -128,6 +132,7 @@ function App() {
         dispatch={dispatch}
         indices={indices}
       />
+      <button onClick={save}>SAVE</button>
     </div>
   )
 }
