@@ -15,6 +15,8 @@ display: flex;
     max-width: revert;
     min-width: revert;
     width: revert;
+    
+ 
   }
 }
 

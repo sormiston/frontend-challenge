@@ -91,8 +91,11 @@ function App() {
 
   function handleClear(e) {
     if (e.keyCode === 8) {
-      setText('')
-      dispatch({ type: ACTIONS.CLEAR })
+      if (window.confirm("Are you sure you want to clear this text?")) {
+        setText('')
+        localStorage.removeItem('data')
+        dispatch({ type: ACTIONS.CLEAR })
+      }
     }
   }
 
@@ -118,7 +121,7 @@ function App() {
           className='textarea'
           readOnly={!!text}
           rows={20}
-          // cols={75}
+          cols={75}
           value={text}
           onChange={(e) => {
             setText(e.target.value)
@@ -129,6 +132,7 @@ function App() {
           }}
           onKeyDown={(e) => handleClear(e)}
           onSelect={(e) => handleSelect(e)}
+          
         />
         <button className='button' onClick={save}>
           SAVE
