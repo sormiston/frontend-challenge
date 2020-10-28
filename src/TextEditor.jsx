@@ -5,10 +5,8 @@ export default function TextEditor({
   handleClear,
   setIndices,
   indices,
-  text,
+  data,
 }) {
-  
-
   const pRef = useRef(null)
 
   function keyDownIntercept(e) {
@@ -19,7 +17,7 @@ export default function TextEditor({
     const start = window.getSelection().anchorOffset
     const end = window.getSelection().focusOffset
     // const offset = sum of length of previous spans in the split-lines array
-    
+
     if (start !== end) {
       setIndices({
         start: start,
@@ -33,18 +31,16 @@ export default function TextEditor({
     }
   }
 
+  console.log(data)
+  
+  // for selection popover functionality
+  // function splitTextArray(data) {
+  //   Object.keys(data.tags).forEach((tag) => {})
+  // }
+
+  // const [beg, mid, end] = printText(data)
   console.log(indices)
-  
-  function printText(text) {
-    let beg = text.substring(0, 80)
-    let mid = text.substring(80, 160)
-    let end = text.substring(160)
-    return [beg, mid, end]
-  }
-  
-  const [beg, mid, end] = printText(text)
-  console.log(indices)
-  
+
   return (
     <div className='section has-background-white'>
       <p
@@ -53,9 +49,8 @@ export default function TextEditor({
         onKeyDown={(e) => keyDownIntercept(e)}
         onSelect={() => handleSelection()}
       >
-        <span>{beg}</span>
-        <span>{mid}</span>
-        <span>{end}</span>
+        {data.text}
+      
       </p>
     </div>
   )

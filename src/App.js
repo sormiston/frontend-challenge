@@ -133,7 +133,7 @@ function App() {
         {!!text ? (
           <TextEditor
             // readOnly={!!text}
-            text={text}
+            data={data}
             // onChange={(e) => {
             //   setText(e.target.value)
             //   dispatch({
