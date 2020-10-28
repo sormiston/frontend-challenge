@@ -4,7 +4,7 @@ import uuid from 'react-uuid'
 import styled from 'styled-components'
 
 const NotesDisplay = styled.section`
-  max-height: 100vh;
+ height: 100vh;
   overflow-y: auto;
    /* Hide scrollbar for Chrome, Safari and Opera */
 &::-webkit-scrollbar {

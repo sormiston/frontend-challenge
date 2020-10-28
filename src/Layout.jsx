@@ -2,11 +2,12 @@ import React, { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Main = styled.main`
-  height: inherit;
+  height: 100vh;
   display: flex;
 
   #text-section {
-    height: inherit;
+    max-height: 100vh;
+    overflow-y: auto;
     display: flex;
     flex-flow: column;
     width: 60%;
@@ -24,6 +25,7 @@ const Main = styled.main`
 
   #annotate-section {
     width: 40%;
+    height: 100vh;
   }
 `
 
@@ -52,6 +54,7 @@ export default function Layout(props) {
     buttonBankOffset === 0 && setButtonBankOffset(textSectionRef.current.offsetWidth)
     buttonBankOffset > 0 && buttonBankRef.current.classList.remove('hidden')
   })
+  console.log(props.children[3]);
   
   return (
     <Main>
