@@ -27,7 +27,7 @@ display: flex;
 `
 
 export default function Layout(props) {
-  console.log(props.children)
+  
   return (
     <Main>
       <section className="section has-background-light" id="text-section">

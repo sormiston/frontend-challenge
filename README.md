@@ -41,11 +41,12 @@
 | ------------- | :------------: | -------- | ---- |
 | _Sprint 3_ |
 | *Popup annotator* | + split text area component <br/> + change `<textarea>` to `<p>` and check for functional equivalency <br />  | H | OK
-| Implement Highlighting | split text with spans according to indices; good time to split textarea as compnent separate from app| H | |
-| Intercept clears or pastes with chance to save | | L | |
+| localize index selection to textEditor |
+| *Implement Highlighting* | + onSelect listener to update `indices` state <br /> +split string into split text with spans according to indices, store to array | H | |
 | Disable possibility to annotate word fragment | helper algo | M | |
 | refactor text state into reducer |  | L
-| investigate if useContext can help share state |
+| investigate if useContext can help share state | | L
+
 
 <br>
 
@@ -53,8 +54,8 @@
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
 | _Sprint 4_ |
-| Dot indicator on lines with annotations | L
-| Resizable text port | L
+| Dot indicator on lines with annotations | | L
+| Resizable text port | | L
 | Color indications on textbox to indicate ready/text locked |
 
 

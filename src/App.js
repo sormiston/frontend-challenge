@@ -113,12 +113,12 @@ function App() {
     }
   }
 
-  function handleSelect(e) {
-    setIndices({
-      start: e.target.selectionStart,
-      end: e.target.selectionEnd,
-    })
-  }
+  // function handleSelect(e) {
+  //   setIndices({
+  //     start: e.target.selectionStart,
+  //     end: e.target.selectionEnd,
+  //   })
+  // }
 
   function save() {
     alert(`POST request --  \n ${JSON.stringify(data, null, 2)}`)
@@ -141,8 +141,9 @@ function App() {
             //     payload: e.target.value,
             //   })
             // }}
+            indices={indices}
+            setIndices={setIndices}
             handleClear={handleClear}
-            onSelect={(e) => handleSelect(e)}
           />
         ) : (
           <textarea
