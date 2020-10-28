@@ -1,4 +1,6 @@
 
+
+
 ### Task Manager: _Sprint 1_
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
@@ -58,7 +60,6 @@
 | Color indications on textbox to indicate ready/text locked |
 
 
-### Observations
 
 ### Data scheme:
 
@@ -85,35 +86,3 @@ const data = {
 
 > Use this section to display the structure of how your React components are being rendered. This should show the parent to child relation between you components. In other words, show which components are rendering the other components.
 
-# PRIBERAM FRONTEND CHALLEGNE
-
----
-
-## Architecture & Dependency set-up
-
-- npxcreate-react-app
-
-### Additional installs:
-
-- <npm package>
-
-### Uninstalled:
-
----
-
-### Key Terms
-
-- <term>
-
----
-
-### Process
-
-1. Removals and changes to npx express-generator scaffolding:
-
-- Import passport
-- ...
-
----
-
-## Observations
