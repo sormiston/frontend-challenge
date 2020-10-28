@@ -54,7 +54,7 @@ export default function Layout(props) {
     buttonBankOffset === 0 && setButtonBankOffset(textSectionRef.current.offsetWidth)
     buttonBankOffset > 0 && buttonBankRef.current.classList.remove('hidden')
   })
-  console.log(props.children[3]);
+ 
   
   return (
     <Main>
