@@ -1,21 +1,22 @@
 import React from 'react'
-import { color } from './App'
+import { color } from '../App'
 
-export default function ExcerptCard({ tag, text, start, end }) {
+export default function ExcerptCard({ tag, text, start, end, setHighlight }) {
   
-
   return (
-    <div className='card mb-3'>
+    <div
+      className='card mb-3'
+      onMouseEnter={() => setHighlight({start, end})}
+    >
       <header className='card-header'>
-        <p className='card-header-title'>   
+        <p className='card-header-title'>
           <span className={`tag ${color(tag)}`}>{tag}</span>
         </p>
-        
+
         {/* reminder: add delete functionality */}
-          <span className='icon'>
-            <i className='fas fa-angle-down' aria-hidden='true'></i>
-          </span>
-   
+        <span className='icon'>
+          <i className='fas fa-angle-down' aria-hidden='true'></i>
+        </span>
       </header>
       <div className='card-content'>
         <div className='content'>
@@ -25,7 +26,6 @@ export default function ExcerptCard({ tag, text, start, end }) {
             {start} {end}
           </small>
           <br />
-          
         </div>
       </div>
     </div>

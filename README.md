@@ -40,9 +40,8 @@
 | Task | Implementation | Priority | Done |
 | ------------- | :------------: | -------- | ---- |
 | _Sprint 3_ |
-| *Popup annotator* | + split text area component <br/> + change `<textarea>` to `<p>` and check for functional equivalency <br />  | H | OK
-| localize index selection to textEditor |
-| *Implement Highlighting* | + onSelect listener to update `indices` state <br /> +split string into split text with spans according to indices, store to array | H | |
+| *Popup annotator* | + split text area component <br/> + change `<textarea>` to `<p>` and check for functional equivalency <br />  | H | out of reach
+| *Implement Highlighting* | | H | |
 | Disable possibility to annotate word fragment | helper algo | M | |
 | refactor text state into reducer |  | L
 | investigate if useContext can help share state | | L

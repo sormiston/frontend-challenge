@@ -1,5 +1,5 @@
 import React from 'react'
-import { ACTIONS, TAGS, color } from './App'
+import { ACTIONS, TAGS, color } from '../App'
 
 
 export default function TagButton({

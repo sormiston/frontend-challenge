@@ -1,9 +1,9 @@
 import React, { useReducer, useState, useEffect } from 'react'
 import uuid from 'react-uuid'
-import TagButton from './TagButton'
+import TagButton from './Subcomponents/TagButton'
 import Layout from './Layout'
-import AnnotationsReader from './AnnotationsReader'
-import TextEditor from './TextEditor'
+import AnnotationsReader from './Components/AnnotationsReader'
+import TextEditor from './Components/TextEditor'
 
 export const ACTIONS = Object.freeze({
   MERGE_TEXT: 'merge_text',
@@ -96,6 +96,7 @@ function App() {
     end: null,
   })
   const [selectionValid, setSelectionValid] = useState(false)
+  const [highlight, setHighlight] = useState({})
 
   useEffect(() => {
     if (indices.start !== null && indices.start !== indices.end) {
@@ -113,13 +114,6 @@ function App() {
     }
   }
 
-  // function handleSelect(e) {
-  //   setIndices({
-  //     start: e.target.selectionStart,
-  //     end: e.target.selectionEnd,
-  //   })
-  // }
-
   function save() {
     alert(`POST request --  \n ${JSON.stringify(data, null, 2)}`)
     localStorage.removeItem('data')
@@ -132,18 +126,11 @@ function App() {
       <Layout>
         {!!text ? (
           <TextEditor
-            // readOnly={!!text}
             data={data}
-            // onChange={(e) => {
-            //   setText(e.target.value)
-            //   dispatch({
-            //     type: ACTIONS.MERGE_TEXT,
-            //     payload: e.target.value,
-            //   })
-            // }}
             indices={indices}
             setIndices={setIndices}
             handleClear={handleClear}
+            highlight={highlight}
           />
         ) : (
           <textarea
@@ -172,7 +159,7 @@ function App() {
           />
         ))}
 
-        <AnnotationsReader data={data} />
+        <AnnotationsReader data={data} setHighlight={setHighlight} />
       </Layout>
     </div>
   )

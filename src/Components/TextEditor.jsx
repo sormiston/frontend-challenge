@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 export default function TextEditor({
@@ -7,8 +7,13 @@ export default function TextEditor({
   indices,
   data,
 }) {
+  const [highlights, setHighlights] = useState([])
   const pRef = useRef(null)
 
+  useEffect(() => {
+    setHighlights(getHighlights())
+  }, [])
+  
   function keyDownIntercept(e) {
     if (e.keyCode === 8) handleClear(e)
     e.preventDefault()
@@ -16,7 +21,6 @@ export default function TextEditor({
   function handleSelection() {
     const start = window.getSelection().anchorOffset
     const end = window.getSelection().focusOffset
-    // const offset = sum of length of previous spans in the split-lines array
 
     if (start !== end) {
       setIndices({
@@ -31,15 +35,39 @@ export default function TextEditor({
     }
   }
 
-  console.log(data)
-  
+  function getHighlights() {
+    // aggregate
+    let result = []
+    Object.keys(data.tags).forEach((tag) => {
+      let substrObjects = data.tags[tag].map((sso) => {
+        return { ...sso, tag }
+      })
+      result = result.concat(substrObjects)
+    })
+
+    // sort -- NOT NEEDED
+    result.sort((a, b) => {
+      return a.start - b.start
+    })
+    
+    // map (results in { string, tag } -- NOT NEEDED )
+    result = result.map(sso => {
+      const substr = data.text.substring(sso.start, sso.end)
+      const tag = sso.tag
+      return { string: substr, tag }
+    })
+    
+    // [ {start, end, tag}, ... ]
+    return result
+  }
+
   // for selection popover functionality
   // function splitTextArray(data) {
   //   Object.keys(data.tags).forEach((tag) => {})
   // }
 
   // const [beg, mid, end] = printText(data)
-  console.log(indices)
+  
 
   return (
     <div className='section has-background-white'>
@@ -50,7 +78,6 @@ export default function TextEditor({
         onSelect={() => handleSelection()}
       >
         {data.text}
-      
       </p>
     </div>
   )
