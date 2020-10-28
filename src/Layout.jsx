@@ -85,9 +85,9 @@ export default function Layout(props) {
           {props.children[2]}
         </ButtonBank>
     
-      <section className='section' id='annotate-section'>
+      {/* <section className='section' id='annotate-section'> */}
         {props.children[3]}
-      </section>
+      {/* </section> */}
     </Main>
   )
 }

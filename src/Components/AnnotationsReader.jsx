@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 const NotesDisplay = styled.section`
  height: 100vh;
+ width: 40%;
   overflow-y: auto;
    /* Hide scrollbar for Chrome, Safari and Opera */
 &::-webkit-scrollbar {
