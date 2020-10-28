@@ -26,6 +26,10 @@ export default function TextEditor({
       pos,
     })
   }, [highlight])
+  
+  useEffect(() => {
+    
+  }, [highlight])
 
   function keyDownIntercept(e) {
     if (e.keyCode === 8) handleClear(e)

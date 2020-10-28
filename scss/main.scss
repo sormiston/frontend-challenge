@@ -2,6 +2,9 @@
 @import "../node_modules/bulma/bulma.sass";
 
 
+* {
+  scroll-behavior: smooth;
+}
 
 textarea.textarea {
   border: none;

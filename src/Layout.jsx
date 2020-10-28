@@ -60,6 +60,7 @@ export default function Layout(props) {
         ref={textSectionRef}
         className='section has-background-light'
         id='text-section'
+        
       >
         <div className='level'>
           <div className='level-left'>
