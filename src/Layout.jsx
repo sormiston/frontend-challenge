@@ -28,12 +28,10 @@ const Main = styled.main`
     height: 100vh;
   }
 `
-
 const ButtonBank = styled.div`
-  position: fixed;
-  width: 150px;
+  width: 170px;
   height: 100vh;
-  left: ${(props) => props.xOffset}px;
+  left: 60%;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -72,22 +70,14 @@ export default function Layout(props) {
           </div>
         </div>
         {props.children[0]}
-      </section>
-      <section id='divider'></section>
-     
+      </section>  
         <ButtonBank
           ref={buttonBankRef}
           className='hidden'
-          xOffset={
-            textSectionRef.current && textSectionRef.current.offsetWidth
-          }
         >
           {props.children[2]}
         </ButtonBank>
-    
-      {/* <section className='section' id='annotate-section'> */}
         {props.children[3]}
-      {/* </section> */}
     </Main>
   )
 }

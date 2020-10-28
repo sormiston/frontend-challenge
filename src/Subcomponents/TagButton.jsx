@@ -13,7 +13,7 @@ export default function TagButton({
   return (
     <button
     disabled={!selectionValid}
-      className={`button m-2 is-${colorByTag(tag)}`}
+      className={`button m-3 is-${colorByTag(tag)}`}
     onClick={(e) => {
       
         dispatch({
