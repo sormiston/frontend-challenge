@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-// import ButtonBank from './ButtonBank'
 
 const Main = styled.main`
   height: inherit;
@@ -8,7 +7,6 @@ const Main = styled.main`
 
   #text-section {
     height: inherit;
-    /* background-color: red; */
     display: flex;
     flex-flow: column;
     width: 60%;
@@ -41,9 +39,6 @@ const ButtonBank = styled.div`
 
 export default function Layout(props) {
   const textSectionRef = useRef(null)
-
-  textSectionRef.current &&
-    console.log(textSectionRef.current.offsetWidth)
 
   return (
     <Main>
