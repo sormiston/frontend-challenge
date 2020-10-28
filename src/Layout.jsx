@@ -17,7 +17,7 @@ const Main = styled.main`
     overflow-y: auto;
     display: flex;
     flex-flow: column;
-
+    
   }
   #divider {
     min-width: 150px !important;

@@ -51,7 +51,7 @@ export default function AnnotationsReader({ data, setHighlight }) {
     return result
   }
 
-  console.log(orderAnnotations())
+  
   const tags = Object.keys(data.tags)
 
   return (

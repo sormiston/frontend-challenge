@@ -3,10 +3,15 @@ import { colorByTag } from '../App'
 
 export default function ExcerptCard({ tag, text, start, end, setHighlight }) {
   
+  function highlight(e) {
+    e.preventDefault()
+    setHighlight({start, end, tag})
+  }
+  
   return (
     <div
       className='card mb-3'
-      onMouseEnter={() => setHighlight({start, end, tag})}
+      onMouseEnter={(e) => highlight(e)}
     >
       <header className='card-header'>
         <p className='card-header-title'>
