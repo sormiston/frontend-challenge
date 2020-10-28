@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Main = styled.main`
@@ -35,11 +35,24 @@ const ButtonBank = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: center;
+  opacity: 1;
+  transition: opacity .6s ease-in .4s;
+  
+  &.hidden {
+    opacity: 0;
+  }
 `
 
 export default function Layout(props) {
+  const [buttonBankOffset, setButtonBankOffset] = useState(0)
   const textSectionRef = useRef(null)
+  const buttonBankRef = useRef(null)
 
+  useEffect(() => {
+    buttonBankOffset === 0 && setButtonBankOffset(textSectionRef.current.offsetWidth)
+    buttonBankOffset > 0 && buttonBankRef.current.classList.remove('hidden')
+  })
+  
   return (
     <Main>
       <section
@@ -58,13 +71,17 @@ export default function Layout(props) {
         {props.children[0]}
       </section>
       <section id='divider'></section>
-      <ButtonBank
-        xOffset={
-          textSectionRef.current && textSectionRef.current.offsetWidth
-        }
-      >
-        {props.children[2]}
-      </ButtonBank>
+     
+        <ButtonBank
+          ref={buttonBankRef}
+          className='hidden'
+          xOffset={
+            textSectionRef.current && textSectionRef.current.offsetWidth
+          }
+        >
+          {props.children[2]}
+        </ButtonBank>
+    
       <section className='section' id='annotate-section'>
         {props.children[3]}
       </section>
