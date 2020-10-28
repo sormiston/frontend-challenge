@@ -83,7 +83,8 @@ function cacheData(data) {
   localStorage.setItem('data', JSON.stringify(data))
 }
 
-// REACT COMPONENT
+// COMPONENT STARTS HERE !
+
 function App() {
   const initialState = localStorage.getItem('data')
     ? JSON.parse(localStorage.getItem('data'))
@@ -96,7 +97,10 @@ function App() {
     end: null,
   })
   const [selectionValid, setSelectionValid] = useState(false)
-  const [highlight, setHighlight] = useState({})
+  const [highlight, setHighlight] = useState({
+    start: null,
+    end: null
+  })
 
   useEffect(() => {
     if (indices.start !== null && indices.start !== indices.end) {
