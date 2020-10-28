@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import TextEditor from './Components/TextEditor'
 
 const Main = styled.main`
   height: 100vh;
@@ -36,8 +37,8 @@ const ButtonBank = styled.div`
   flex-flow: column;
   justify-content: center;
   opacity: 1;
-  transition: opacity .6s ease-in .4s;
-  
+  transition: opacity 0.6s ease-in 0.4s;
+
   &.hidden {
     opacity: 0;
   }
@@ -45,22 +46,19 @@ const ButtonBank = styled.div`
 
 export default function Layout(props) {
   const [buttonBankOffset, setButtonBankOffset] = useState(0)
-  const textSectionRef = useRef(null)
+  
   const buttonBankRef = useRef(null)
 
   useEffect(() => {
-    buttonBankOffset === 0 && setButtonBankOffset(textSectionRef.current.offsetWidth)
-    buttonBankOffset > 0 && buttonBankRef.current.classList.remove('hidden')
+    buttonBankRef.current.classList.remove('hidden')
   })
- 
-  
+
   return (
     <Main>
       <section
-        ref={textSectionRef}
+        
         className='section has-background-light'
         id='text-section'
-        
       >
         <div className='level'>
           <div className='level-left'>
@@ -71,14 +69,11 @@ export default function Layout(props) {
           </div>
         </div>
         {props.children[0]}
-      </section>  
-        <ButtonBank
-          ref={buttonBankRef}
-          className='hidden'
-        >
-          {props.children[2]}
-        </ButtonBank>
-        {props.children[3]}
+      </section>
+      <ButtonBank ref={buttonBankRef} className='hidden'>
+        {props.children[2]}
+      </ButtonBank>
+      {props.children[3]}
     </Main>
   )
 }
