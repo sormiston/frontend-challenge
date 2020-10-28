@@ -1,5 +1,5 @@
 import React from 'react'
-import { ACTIONS, TAGS, color } from '../App'
+import { ACTIONS, colorByTag } from '../App'
 
 
 export default function TagButton({
@@ -13,7 +13,7 @@ export default function TagButton({
   return (
     <button
     disabled={!selectionValid}
-      className={`button ml-3 ${color(tag)}`}
+      className={`button ml-3 is-${colorByTag(tag)}`}
     onClick={(e) => {
       
         dispatch({

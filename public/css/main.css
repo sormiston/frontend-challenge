@@ -7707,3 +7707,6 @@ html, body, #root, .App {
 
 textarea.textarea {
   border: none; }
+
+p {
+  outline: none; }

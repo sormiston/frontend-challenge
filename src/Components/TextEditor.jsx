@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { colorByTag } from '../App'
 import styled from 'styled-components'
+
 
 export default function TextEditor({
   handleClear,
@@ -10,21 +12,19 @@ export default function TextEditor({
   const [splitText, setSplitText] = useState({
     pre: null,
     mid: null,
-    pos: null
+    pos: null,
   })
 
   useEffect(() => {
-    
-      const pre = data.text.slice(0, highlight.start)
-      const mid = data.text.slice(highlight.start, highlight.end)
-      const pos = data.text.slice(highlight.end)
+    const pre = data.text.slice(0, highlight.start)
+    const mid = data.text.slice(highlight.start, highlight.end)
+    const pos = data.text.slice(highlight.end)
 
-      setSplitText({
-        pre,
-        mid,
-        pos,
-      })
-    
+    setSplitText({
+      pre,
+      mid,
+      pos,
+    })
   }, [highlight])
 
   function keyDownIntercept(e) {
@@ -59,7 +59,11 @@ export default function TextEditor({
         onKeyDown={(e) => keyDownIntercept(e)}
         onSelect={() => handleSelection()}
       >
-        {data.text}
+        {splitText.pre}
+        <span className={`has-background-${colorByTag(highlight.tag)}-light`}>
+          {splitText.mid}
+        </span>
+        {splitText.pos}
       </p>
     </div>
   )

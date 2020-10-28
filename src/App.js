@@ -19,16 +19,16 @@ export const TAGS = Object.freeze({
   EVENT: 'Event',
 })
 
-export function color(tag) {
+export function colorByTag(tag) {
   switch (tag) {
     case TAGS.PERSON:
-      return 'is-primary'
+      return 'primary'
     case TAGS.ORG:
-      return 'is-link'
+      return 'link'
     case TAGS.PLACE:
-      return 'is-warning'
+      return 'warning'
     case TAGS.EVENT:
-      return 'is-danger'
+      return 'danger'
     default:
       return ''
   }
@@ -99,7 +99,7 @@ function App() {
   const [selectionValid, setSelectionValid] = useState(false)
   const [highlight, setHighlight] = useState({
     start: null,
-    end: null
+    end: null,
   })
 
   useEffect(() => {

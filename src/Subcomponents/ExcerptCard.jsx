@@ -1,16 +1,16 @@
 import React from 'react'
-import { color } from '../App'
+import { colorByTag } from '../App'
 
 export default function ExcerptCard({ tag, text, start, end, setHighlight }) {
   
   return (
     <div
       className='card mb-3'
-      onMouseEnter={() => setHighlight({start, end})}
+      onMouseEnter={() => setHighlight({start, end, tag})}
     >
       <header className='card-header'>
         <p className='card-header-title'>
-          <span className={`tag ${color(tag)}`}>{tag}</span>
+          <span className={`tag is-${colorByTag(tag)}`}>{tag}</span>
         </p>
 
         {/* reminder: add delete functionality */}
