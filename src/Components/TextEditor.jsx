@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { colorByTag } from '../App'
 import styled from 'styled-components'
 
-
 export default function TextEditor({
   handleClear,
   setIndices,
   data,
   highlight,
+  setHighlight,
 }) {
   const [splitText, setSplitText] = useState({
     pre: null,
@@ -48,19 +48,20 @@ export default function TextEditor({
     }
   }
 
-  console.log(splitText.pre)
-  console.log(splitText.mid)
-  console.log(splitText.pos)
-
   return (
     <div className='section has-background-white'>
       <p
         contentEditable={true}
         onKeyDown={(e) => keyDownIntercept(e)}
         onSelect={() => handleSelection()}
+        onMouseOver={() => setHighlight({ start: null, end: null, tag: null })}
       >
         {splitText.pre}
-        <span className={`has-background-${colorByTag(highlight.tag)}-light`}>
+        <span
+          className={`has-background-${colorByTag(
+            highlight.tag
+          )}-light`}
+        >
           {splitText.mid}
         </span>
         {splitText.pos}

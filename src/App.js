@@ -135,6 +135,7 @@ function App() {
             setIndices={setIndices}
             handleClear={handleClear}
             highlight={highlight}
+            setHighlight={setHighlight}
           />
         ) : (
           <textarea
