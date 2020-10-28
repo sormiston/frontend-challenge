@@ -136,6 +136,7 @@ function App() {
             handleClear={handleClear}
             highlight={highlight}
             setHighlight={setHighlight}
+            
           />
         ) : (
           <textarea

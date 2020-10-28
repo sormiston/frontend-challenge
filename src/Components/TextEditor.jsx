@@ -53,7 +53,7 @@ export default function TextEditor({
   }
 
   return (
-    <div className='section has-background-white'>
+    <div className='section has-background-white' id='text-section'>
       <p
         contentEditable={true}
         onKeyDown={(e) => keyDownIntercept(e)}

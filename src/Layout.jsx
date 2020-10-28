@@ -6,18 +6,18 @@ const Main = styled.main`
   height: 100vh;
   display: flex;
 
-  #text-section {
+  #text-section-ancestor {
+    width: 60%;  
     max-height: 100vh;
+    display: flex;
+    flex-flow: column;
+  }
+  
+  #text-section {
     overflow-y: auto;
     display: flex;
     flex-flow: column;
-    width: 60%;
 
-    #editor {
-      max-width: revert;
-      min-width: revert;
-      width: revert;
-    }
   }
   #divider {
     min-width: 150px !important;
@@ -56,9 +56,7 @@ export default function Layout(props) {
   return (
     <Main>
       <section
-        
-        className='section has-background-light'
-        id='text-section'
+        className='section has-background-light' id='text-section-ancestor'
       >
         <div className='level'>
           <div className='level-left'>
