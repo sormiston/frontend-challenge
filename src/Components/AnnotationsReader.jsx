@@ -18,12 +18,6 @@ const NotesDisplay = styled.section`
 `
 
 export default function AnnotationsReader({ data, setHighlight }) {
-  const [annotations, setAnnotations] = useState([])
-  
-  useEffect(() => {
-    setAnnotations(orderAnnotations())
-  }, [])
-  
   function orderAnnotations() {
     // aggregate
     let result = []
@@ -51,24 +45,20 @@ export default function AnnotationsReader({ data, setHighlight }) {
     return result
   }
 
-  
-  const tags = Object.keys(data.tags)
-
   return (
     <NotesDisplay>
-      {annotations.map((ann) => {
-          return (
-            <ExcerptCard
-              key={uuid()}
-              tag={ann.tag}
-              text={ann.string}
-              start={ann.start}
-              end={ann.end}
-              setHighlight={setHighlight}
-            />
-          )
-        })
-      }
+      {orderAnnotations().map((ann) => {
+        return (
+          <ExcerptCard
+            key={uuid()}
+            tag={ann.tag}
+            text={ann.string}
+            start={ann.start}
+            end={ann.end}
+            setHighlight={setHighlight}
+          />
+        )
+      })}
     </NotesDisplay>
   )
 }
