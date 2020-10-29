@@ -66,15 +66,16 @@
 
 <br />
 
-### Task Manager: _Sprint 3_
+### Task Manager: _Sprint 3_ (POST MVP)
 | Task | Implementation | Priority | Done |
 | ------------- | :------------: | -------- | ---- |
 | _Sprint 3_ |
-| *Popup annotator* | + split text area component <br/> + change `<textarea>` to `<p>` and check for functional equivalency <br />  | H | out of reach
-| *Implement Highlighting* | | H | | OK
+| *In-line Popup annotator* | See [medium-editor open source](https://github.com/yabwe/medium-editor) for implementation / ideas.  Medium-editor *needs* a `contentEditable=true` element, however... | L | 
+| *Implement Highlighting* | onMouseEnter of Excerpt Cards alters App State; passes indices to render a span in text editor| H | OK
 | Disable possibility to annotate word fragment | helper algo | M | |
 | refactor text state into reducer |  | L
 | investigate if useContext can help share state | | L
+| Algorithm for auto scrolling to hightlights in text editor | MATH! | H |
 
 
 <br>
