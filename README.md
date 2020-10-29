@@ -20,7 +20,7 @@
 
 1. There is also an algorithm to auto scroll to the highlight in the text editor if it is outside of the viewport, altough there are still bugs there.
 
-1. Foi uma baita desafio, e agredeço muito pela oportunidade.  Espero que gostem, e muito obrigado!!
+1. Foi um baita desafio, e agredeço muito pela oportunidade.  Espero que gostem, e muito obrigado!!
 
 
 <br />

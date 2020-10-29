@@ -1,17 +1,21 @@
 import React from 'react'
 import { colorByTag } from '../App'
 
-export default function ExcerptCard({ tag, text, start, end, setHighlight }) {
-  
-  function highlight(e) {
-    e.preventDefault()
-    setHighlight({start, end, tag})
-  }
-  
+export default function ExcerptCard({
+  tag,
+  text,
+  start,
+  end,
+  setHighlight,
+}) {
   return (
     <div
       className='card mb-3'
-      onMouseEnter={(e) => highlight(e)}
+      onMouseEnter={() =>
+        setHighlight({ start, end, tag })}
+      onMouseLeave={() =>
+        setHighlight({ start: null, end: null, tag: null })
+      }
     >
       <header className='card-header'>
         <p className='card-header-title'>
@@ -28,7 +32,7 @@ export default function ExcerptCard({ tag, text, start, end, setHighlight }) {
           {text}
           <br />
           <small>
-            {start} {end}
+            start {start} - end {end}
           </small>
           <br />
         </div>
