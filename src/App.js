@@ -100,6 +100,8 @@ function App() {
   const [highlight, setHighlight] = useState({
     start: null,
     end: null,
+    tag: null,
+    active: false
   })
 
   useEffect(() => {

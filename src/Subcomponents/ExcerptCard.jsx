@@ -12,9 +12,10 @@ export default function ExcerptCard({
     <div
       className='card mb-3'
       onMouseEnter={() =>
-        setHighlight({ start, end, tag })}
+        setHighlight({ start, end, tag, active: true })
+      }
       onMouseLeave={() =>
-        setHighlight({ start: null, end: null, tag: null })
+        setHighlight((prev) => ({ ...prev, active: false }))
       }
     >
       <header className='card-header'>

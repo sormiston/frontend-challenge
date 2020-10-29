@@ -11,7 +11,7 @@ export default function TextEditor({
   const [splitText, setSplitText] = useState({
     pre: null,
     mid: null,
-    pos: null,
+    pos: data.text,
   })
 
   const spanRef = useRef(null)
@@ -19,51 +19,38 @@ export default function TextEditor({
   const pRef = useRef(null)
 
   useEffect(() => {
-    const pre = data.text.slice(0, highlight.start)
-    const mid = data.text.slice(highlight.start, highlight.end)
-    const pos = data.text.slice(highlight.end)
+    if (highlight.active) {
+      const pre = data.text.slice(0, highlight.start)
+      const mid = data.text.slice(highlight.start, highlight.end)
+      const pos = data.text.slice(highlight.end)
 
-    setSplitText({
-      pre,
-      mid,
-      pos,
-    })
-  }, [highlight])
-
-  useEffect(() => {
-    const viewTop = scrollParentRef.current.scrollTop
-    const viewBottom = scrollParentRef.current.clientHeight + viewTop
-    const eltPos = spanRef.current.offsetTop
-
-    if (eltPos < viewTop) {
-      scrollParentRef.current.scrollTo(
-        0,
-        -1 * Math.abs(eltPos - viewTop)
-      )
-    } else if (eltPos > viewBottom) {
-      scrollParentRef.current.scrollTo(0, eltPos - viewBottom + 100)
+      setSplitText({
+        pre,
+        mid,
+        pos,
+      })
     }
   }, [highlight])
 
-  if (scrollParentRef.current && spanRef.current) {
-    console.log('viewTop ' + scrollParentRef.current.scrollTop)
-    console.log('elt ' + spanRef.current.offsetTop)
-    console.log(
-      'viewBottom ' +
-        scrollParentRef.current.clientHeight +
-        scrollParentRef.current.scrollTop
-    )
-  }
-  // Focus carat to editable <p> to prevent scroll skipping on card mouseOvers!
-  useEffect(() => pRef.current.focus(), [])
+  useEffect(() => {
+    if (highlight.active) {
+      spanRef.current.scrollIntoView({ block: 'center' })
+    }
+  }, [splitText])
 
   function keyDownIntercept(e) {
     if (e.keyCode === 8) handleClear(e)
     e.preventDefault()
   }
   function handleSelection() {
-    const start = window.getSelection().anchorOffset
-    const end = window.getSelection().focusOffset
+    const start = Math.min(
+      window.getSelection().anchorOffset,
+      window.getSelection().focusOffset
+    )
+    const end = Math.max(
+      window.getSelection().anchorOffset,
+      window.getSelection().focusOffset
+    )
 
     if (start !== end) {
       setIndices({
@@ -85,21 +72,23 @@ export default function TextEditor({
       id='text-section'
     >
       <p
+        // potential future refactor to avoid `contentEditable` issue:
+        // contentEditable false, and retool onSelect as getting window.getSelection values on mouseUp event
+
         ref={pRef}
         contentEditable={true}
         spellcheck={false}
         onKeyDown={(e) => keyDownIntercept(e)}
         onSelect={() => handleSelection()}
-        // onMouseOver={() =>
-        //   setHighlight({ start: null, end: null, tag: null })
-        // }
       >
         {splitText.pre}
         <span
           ref={spanRef}
-          className={`has-background-${colorByTag(
-            highlight.tag
-          )}-light`}
+          className={
+            highlight.active
+              ? `has-background-${colorByTag(highlight.tag)}-light`
+              : ''
+          }
         >
           {splitText.mid}
         </span>

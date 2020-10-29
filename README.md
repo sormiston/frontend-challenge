@@ -33,7 +33,7 @@
 | Task | Implementation | Priority | Done |
 | ---- | :------------: | -------- | ---- |
 | Functioning textarea | | H | OK |
-| Cannot alter text, only copy/paste/select/clear | `<textArea readOnly={!!text}>` | L | OK
+| Cannot alter text, only copy/paste/select/clear | Ternary: Render \<textarea> element to receive user paste input, else render TextEditor component.  In TextEditor component, preventDefault on keyDown events protects text from editing.  <br />(_See Sprint 3 note about refactoring_)| L | OK
 | initial text state | `useState` initializes to `data`,defaults to empty string | H | OK
 | initial data state | text attr tracks component state, Tags intialize as []s | H | OK
 | Update Text attr of state on Paste ( + cache) | see MERGE_TEXT action in reducer| H | OK
@@ -70,12 +70,23 @@
 | Task | Implementation | Priority | Done |
 | ------------- | :------------: | -------- | ---- |
 | _Sprint 3_ |
-| *In-line Popup annotator* | See [medium-editor open source](https://github.com/yabwe/medium-editor) for implementation / ideas.  Medium-editor *needs* a `contentEditable=true` element, however... | L | 
+| *In-line Popup annotator* | See [medium-editor open source](https://github.com/yabwe/medium-editor) for implementation / ideas.  | L | 
 | *Implement Highlighting* | onMouseEnter of Excerpt Cards alters App State; passes indices to render a span in text editor| H | OK
 | Disable possibility to annotate word fragment | helper algo | M | |
 | refactor text state into reducer |  | L
 | investigate if useContext can help share state | | L
-| Algorithm for auto scrolling to hightlights in text editor | MATH! | H |
+| Algorithm for auto scrolling to hightlights in text editor |  | H | OK
 
 
 <br>
+
+### v 1.1 :memo:
+
+:bug: Highlight state persisting after data clearance <br/>
+:ambulance: highlight state cleared on ExcerptCard's mouseLeave listener
+
+:bug: Scrolling not tracking highlight span when it rerenders outside of viewport
+:ambulance: corrected useEffect to ComponentDidUpdate cycle with component state `splitText` as dependency
+
+:bug: mouse selections made "backwards" - where user clicks end idx and backtracks to start - are breaking the pre-highlight-pos model of how text editor renders.
+:ambulance: Math.min and Math.max applied to retrict ascending-order values to start and end, respectively, in the handleSelection.
