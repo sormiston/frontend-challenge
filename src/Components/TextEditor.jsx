@@ -72,12 +72,10 @@ export default function TextEditor({
       id='text-section'
     >
       <p
-        // potential future refactor to avoid `contentEditable` issue:
-        // contentEditable false, and retool onSelect as getting window.getSelection values on mouseUp event
-
         ref={pRef}
         onKeyDown={(e) => keyDownIntercept(e)}
         onMouseUp={() => handleSelection()}
+        onTouchEnd={() => handleSelection()}
       >
         {splitText.pre}
         <span
