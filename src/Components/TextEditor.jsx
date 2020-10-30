@@ -30,12 +30,14 @@ export default function TextEditor({
         pos,
       })
     }
+    // eslint-disable-next-line
   }, [highlight])
 
   useEffect(() => {
     if (highlight.active) {
       spanRef.current.scrollIntoView({ block: 'center' })
     }
+    // eslint-disable-next-line
   }, [splitText])
 
   function keyDownIntercept(e) {
