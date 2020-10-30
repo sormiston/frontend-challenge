@@ -77,7 +77,7 @@ export default function TextEditor({
 
         ref={pRef}
         contentEditable={true}
-        spellcheck={false}
+        spellCheck={false}
         onKeyDown={(e) => keyDownIntercept(e)}
         onSelect={() => handleSelection()}
       >

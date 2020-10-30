@@ -80,7 +80,10 @@
 
 <br>
 
-### v 1.1 :memo:
+
+## Change Log
+
+### 1.1 :memo:
 
 :bug: Highlight state persisting after data clearance <br/>
 :ambulance: highlight state cleared on ExcerptCard's mouseLeave listener
@@ -90,3 +93,8 @@
 
 :bug: mouse selections made "backwards" - where user clicks end idx and backtracks to start - are breaking the pre-highlight-pos model of how text editor renders.
 :ambulance: Math.min and Math.max applied to retrict ascending-order values to start and end, respectively, in the handleSelection.
+
+### 1.2 :memo:
+
+:bug: spellcheck attribute not applying on texteditor paragraph
+:ambulance: `spellCheck` setting via JS
