@@ -98,3 +98,7 @@
 
 :bug: spellcheck attribute not applying on texteditor paragraph
 :ambulance: `spellCheck` setting via JS
+
+:bug: console error against `contentEditable component having children managed by React` - refers to <p> of TextEditor.jsx.
+:ambulance: not a concerning error, since keyDown events are intentionally intercepted to prevent user manipulation (except for backspace clears.)  fixed to suppress console with `supressContentEditableWarning` prop set to `false`.
+
