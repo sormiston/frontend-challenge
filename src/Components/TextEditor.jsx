@@ -76,10 +76,8 @@ export default function TextEditor({
         // contentEditable false, and retool onSelect as getting window.getSelection values on mouseUp event
 
         ref={pRef}
-        contentEditable={true}
-        spellCheck={false}
         onKeyDown={(e) => keyDownIntercept(e)}
-        onSelect={() => handleSelection()}
+        onMouseUp={() => handleSelection()}
       >
         {splitText.pre}
         <span
