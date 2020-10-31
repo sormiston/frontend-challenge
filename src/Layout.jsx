@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import TextEditor from './Components/TextEditor'
 
 const Main = styled.main`
   height: 100vh;
@@ -45,7 +44,6 @@ const ButtonBank = styled.div`
 `
 
 export default function Layout(props) {
-  const [buttonBankOffset, setButtonBankOffset] = useState(0)
   
   const buttonBankRef = useRef(null)
 
