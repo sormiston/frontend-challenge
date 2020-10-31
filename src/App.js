@@ -91,7 +91,6 @@ function App() {
     : dataScheme
 
   const [data, dispatch] = useReducer(reducer, initialState)
-  const [text, setText] = useState(data.text)
   const [indices, setIndices] = useState({
     start: null,
     end: null,
@@ -101,7 +100,7 @@ function App() {
     start: null,
     end: null,
     tag: null,
-    active: false
+    active: false,
   })
 
   useEffect(() => {
@@ -114,7 +113,6 @@ function App() {
 
   function handleClear(e) {
     if (window.confirm('Are you sure you want to clear this text?')) {
-      setText('')
       localStorage.removeItem('data')
       dispatch({ type: ACTIONS.CLEAR })
     }
@@ -123,53 +121,48 @@ function App() {
   function save() {
     alert(`POST request --  \n ${JSON.stringify(data, null, 2)}`)
     localStorage.removeItem('data')
-    setText('')
     dispatch({ type: ACTIONS.CLEAR })
   }
 
   return (
-    <div className='App'>
-      <Layout>
-        {!!text ? (
-          <TextEditor
-            data={data}
-            indices={indices}
-            setIndices={setIndices}
-            handleClear={handleClear}
-            highlight={highlight}
-            setHighlight={setHighlight}
-            
-          />
-        ) : (
-          <textarea
-            className='textarea has-fixed-size'
-            onChange={(e) => {
-              setText(e.target.value)
-              dispatch({
-                type: ACTIONS.MERGE_TEXT,
-                payload: e.target.value,
-              })
-            }}
-          />
-        )}
+    <Layout>
+      {!!data.text ? (
+        <TextEditor
+          data={data}
+          indices={indices}
+          setIndices={setIndices}
+          handleClear={handleClear}
+          highlight={highlight}
+          setHighlight={setHighlight}
+        />
+      ) : (
+        <textarea
+          className='textarea has-fixed-size'
+          onChange={(e) => {
+            dispatch({
+              type: ACTIONS.MERGE_TEXT,
+              payload: e.target.value,
+            })
+          }}
+        />
+      )}
 
-        <button className='button' onClick={save}>
-          SAVE
-        </button>
+      <button className='button' onClick={save}>
+        SAVE
+      </button>
 
-        {Object.keys(TAGS).map((k) => (
-          <TagButton
-            key={uuid()}
-            tag={TAGS[k]}
-            dispatch={dispatch}
-            indices={indices}
-            selectionValid={selectionValid}
-          />
-        ))}
+      {Object.keys(TAGS).map((k) => (
+        <TagButton
+          key={uuid()}
+          tag={TAGS[k]}
+          dispatch={dispatch}
+          indices={indices}
+          selectionValid={selectionValid}
+        />
+      ))}
 
-        <AnnotationsReader data={data} setHighlight={setHighlight} />
-      </Layout>
-    </div>
+      <AnnotationsReader data={data} setHighlight={setHighlight} />
+    </Layout>
   )
 }
 
