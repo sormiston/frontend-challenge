@@ -157,6 +157,7 @@ function App() {
           tag={TAGS[k]}
           dispatch={dispatch}
           indices={indices}
+          setIndices={setIndices}
           selectionValid={selectionValid}
         />
       ))}

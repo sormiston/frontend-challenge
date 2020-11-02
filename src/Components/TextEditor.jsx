@@ -82,7 +82,7 @@ export default function TextEditor({
     selection.removeAllRanges()
     selection.addRange(range)
 
-    console.log('start: ' + start, 'end: ' + end)
+  
     setIndices({
       start: start,
       end: end,
