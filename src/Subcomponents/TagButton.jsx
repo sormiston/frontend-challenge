@@ -7,9 +7,9 @@ export default function TagButton({
   dispatch,
   indices,
   selectionValid,
+  setIndices
 }) {
   
-
   return (
     <button
     disabled={!selectionValid}
@@ -23,6 +23,12 @@ export default function TagButton({
             span: indices,
           },
         })
+      
+      setIndices({
+        start: null,
+        end: null
+      })
+      
       }}
     >
       {tag}
