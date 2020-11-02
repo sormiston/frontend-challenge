@@ -6,7 +6,6 @@ export default function TextEditor({
   setIndices,
   data,
   highlight,
-  setHighlight,
 }) {
   const [splitText, setSplitText] = useState({
     pre: null,
@@ -29,9 +28,14 @@ export default function TextEditor({
         mid,
         pos,
       })
+    } else {
+      setSplitText({
+        pre: null,
+        mid: null,
+        pos: data.text,
+      })
     }
-    // eslint-disable-next-line
-  }, [highlight])
+  }, [highlight, data])
 
   useEffect(() => {
     if (highlight.active) {
@@ -45,26 +49,44 @@ export default function TextEditor({
     e.preventDefault()
   }
   function handleSelection() {
-    const start = Math.min(
-      window.getSelection().anchorOffset,
-      window.getSelection().focusOffset
-    )
-    const end = Math.max(
-      window.getSelection().anchorOffset,
-      window.getSelection().focusOffset
-    )
+    const selection = window.getSelection()
+    const anchorNode = selection.anchorNode
 
-    if (start !== end) {
-      setIndices({
-        start: start,
-        end: end,
-      })
-    } else {
-      setIndices({
+    let start = Math.min(
+      selection.anchorOffset,
+      selection.focusOffset
+    )
+    let end = Math.max(selection.anchorOffset, selection.focusOffset)
+
+    if (start === end) {
+      return setIndices({
         start: null,
         end: null,
       })
     }
+    // Expand selection variables to cover whole words
+    while (!/\s/.test(anchorNode.textContent[start - 1])) {
+      if (start === 0) break
+      start--
+    }
+
+    while (!/\s/.test(anchorNode.textContent[end])) {
+      if (end === anchorNode.textContent.length) break
+      end++
+    }
+    // Imperatively declare the expanded selection in browser
+
+    const range = new Range()
+    range.setStart(anchorNode, start)
+    range.setEnd(anchorNode, end)
+    selection.removeAllRanges()
+    selection.addRange(range)
+
+    console.log('start: ' + start, 'end: ' + end)
+    setIndices({
+      start: start,
+      end: end,
+    })
   }
 
   return (
