@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { colorByTag } from '../App'
+import { colorByTag } from '../utils'
 
 export default function TextEditor({
   handleClear,

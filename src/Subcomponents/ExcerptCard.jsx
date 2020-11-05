@@ -1,5 +1,5 @@
 import React from 'react'
-import { colorByTag } from '../App'
+import { colorByTag } from '../utils'
 
 export default function ExcerptCard({
   tag,

@@ -4,84 +4,8 @@ import TagButton from './Subcomponents/TagButton'
 import Layout from './Layout'
 import AnnotationsReader from './Components/AnnotationsReader'
 import TextEditor from './Components/TextEditor'
+import {ACTIONS, TAGS, colorByTag, dataScheme, reducer, cacheData} from './utils'
 
-export const ACTIONS = Object.freeze({
-  MERGE_TEXT: 'merge_text',
-  ADD_TAG: 'add_tag',
-  CACHE: 'cache',
-  CLEAR: 'clear',
-})
-
-export const TAGS = Object.freeze({
-  PERSON: 'Person',
-  ORG: 'Organization',
-  PLACE: 'Place',
-  EVENT: 'Event',
-})
-
-export function colorByTag(tag) {
-  switch (tag) {
-    case TAGS.PERSON:
-      return 'primary'
-    case TAGS.ORG:
-      return 'link'
-    case TAGS.PLACE:
-      return 'warning'
-    case TAGS.EVENT:
-      return 'danger'
-    default:
-      return ''
-  }
-}
-
-const dataScheme = {
-  text: '',
-  tags: {
-    Person: [],
-    Organization: [],
-    Place: [],
-    Event: [],
-  },
-}
-
-function reducer(state, action) {
-  let newState = {}
-  switch (action.type) {
-    case ACTIONS.MERGE_TEXT:
-      newState = {
-        ...state,
-        text: action.payload,
-      }
-      cacheData(newState)
-      return newState
-
-    case ACTIONS.ADD_TAG:
-      const newTagArray = [
-        ...state.tags[action.payload.tag],
-        action.payload.span,
-      ]
-
-      newState = {
-        ...state,
-        tags: {
-          ...state.tags,
-          [action.payload.tag]: newTagArray,
-        },
-      }
-
-      cacheData(newState)
-      return newState
-
-    case ACTIONS.CLEAR:
-      return dataScheme
-    default:
-      return
-  }
-}
-
-function cacheData(data) {
-  localStorage.setItem('data', JSON.stringify(data))
-}
 
 // COMPONENT STARTS HERE !
 
