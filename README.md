@@ -18,7 +18,7 @@
 
 1. *Hover* over an annotation card to see that annotation highlighted in the text.
 
-1. There is also an algorithm to auto scroll to the highlight in the text editor if it is outside of the viewport, altough there are still bugs there.
+1. Highlights that are activated out of view will be scrolled to inside the text editor.
 
 
 
