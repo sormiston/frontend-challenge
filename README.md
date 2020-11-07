@@ -20,7 +20,7 @@
 
 1. There is also an algorithm to auto scroll to the highlight in the text editor if it is outside of the viewport, altough there are still bugs there.
 
-1. Foi um baita desafio, e agredeço muito pela oportunidade.  Espero que gostem, e muito obrigado!!
+
 
 
 <br />
@@ -38,7 +38,6 @@
 | initial data state | text attr tracks component state, Tags intialize as []s | H | OK
 | Update Text attr of state on Paste ( + cache) | see MERGE_TEXT action in reducer| H | OK
 | Add Tags ( + cache) | reducer: see ADD_TAG | H | OK
-|
 | Reducer Function Save to DB (+ clear) | theoretical ajax POST | H | OK
 | Cache helper function | | H |  OK
 | Clear/New function | | M |  OK |
