@@ -65,12 +65,12 @@ export default function TextEditor({
       })
     }
     // Expand selection variables to cover whole words
-    while (!/\s/.test(anchorNode.textContent[start - 1])) {
+    while (!/[\s,.!?]/.test(anchorNode.textContent[start - 1])) {
       if (start === 0) break
       start--
     }
 
-    while (!/\s/.test(anchorNode.textContent[end])) {
+    while (!/[\s,.!?]/.test(anchorNode.textContent[end])) {
       if (end === anchorNode.textContent.length) break
       end++
     }
