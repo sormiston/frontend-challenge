@@ -37,7 +37,7 @@
 | Reducer Function Save to DB (+ clear) | theoretical ajax POST | H | OK
 | Cache helper function | | H |  OK
 | Clear/New function | | M |  OK |
-| tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H
+| tag sidebar | 4 tags that dispatch start and end indices on click; differentiated by payload | H | OK |
 | Persist state of selected text | `onSelect` event + handler + `useState` | | OK 
 <br />
 
@@ -67,9 +67,8 @@
 | _Sprint 3_ |
 | *In-line Popup annotator* | See [medium-editor open source](https://github.com/yabwe/medium-editor) for implementation / ideas.  | L | 
 | *Implement Highlighting* | onMouseEnter of Excerpt Cards alters App State; passes indices to render a span in text editor| H | OK
-| Disable possibility to annotate word fragment | helper algo | M | |
-| refactor text state into reducer |  | L
-| investigate if useContext can help share state | | L
+| Disable possibility to annotate word fragment | helper algo | M | OK |
+| investigate if useContext can help maintain state sharing | | L
 | Algorithm for auto scrolling to hightlights in text editor |  | H | OK
 
 
@@ -87,7 +86,7 @@
 :ambulance: corrected useEffect to ComponentDidUpdate cycle with component state `splitText` as dependency
 
 :bug: mouse selections made "backwards" - where user clicks end idx and backtracks to start - are breaking the pre-highlight-pos model of how text editor renders.
-:ambulance: Math.min and Math.max applied to retrict ascending-order values to start and end, respectively, in the handleSelection.
+:ambulance: Math.min and Math.max applied to retrict ascending-order values to start and end, respectively, in TextEditor.jsx - handleSelection.
 
 ### 1.2 :memo:
 
