@@ -10,17 +10,13 @@
 
 1. On page load, user may copy text into the textarea.  Text pasted here will be selectable, but to preserve the integrity of the text, no characters can be added or removed.
 
-1. User may select text excerpts by clicking and dragging.  The annotation buttons become active when a selection is detected.  Click a category tag to annotate to that category.  Annotations are added to the read out display *in the order they appear in the text*, for easier reading continuity.
+1. User may select text excerpts by clicking and dragging.  The annotation buttons become active when a selection is detected.  Click a category tag to annotate to that category.  Annotations appear in the annotations display in the order they appear in the text - *regardless of time of user entry* - to preserve comparative continuity.
 
-1. All work (text + annotations) will persist via local storage, until the user either a) clicks SAVE or b) hits `backspace`.  Hitting backspace will clear all work (after a confirmation message).  Hitting SAVE will display the JSON data object that is made ready for a POST request to backend, and then clear all work including local storage.
+1. All work (text + annotations) will persist in local storage, until the user either a) clicks SAVE or b) hits `backspace`.  Hitting backspace will clear all work (after a confirmation message).  Hitting SAVE will display the JSON data object that is made ready for a POST request to backend, and then clear all work including local storage.
 
-1. Both the text editor and the annotations reader are fixed viewport scroll areas, so add as many annotations as you like without losing your place in the text!
+1. To check the context surrounding annotations, *hover* your mourse cursor over an annotation card.  You will see that annotation highlighted in the text.
 
-1. *Hover* over an annotation card to see that annotation highlighted in the text.
-
-1. There is also an algorithm to auto scroll to the highlight in the text editor if it is outside of the viewport, altough there are still bugs there.
-
-1. Foi um baita desafio, e agredeço muito pela oportunidade.  Espero que gostem, e muito obrigado!!
+1. Highlights that are activated out of view will be scrolled to inside the text editor.  You can test this by making edits across differnt regions of a longer text.
 
 
 <br />
@@ -38,7 +34,6 @@
 | initial data state | text attr tracks component state, Tags intialize as []s | H | OK
 | Update Text attr of state on Paste ( + cache) | see MERGE_TEXT action in reducer| H | OK
 | Add Tags ( + cache) | reducer: see ADD_TAG | H | OK
-|
 | Reducer Function Save to DB (+ clear) | theoretical ajax POST | H | OK
 | Cache helper function | | H |  OK
 | Clear/New function | | M |  OK |
