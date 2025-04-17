@@ -1,42 +1,42 @@
-import React, { useReducer, useState, useEffect, useCallback } from "react";
-import uuid from "react-uuid";
-import TagButton from "./Subcomponents/TagButton";
-import Layout from "./Layout";
-import AnnotationsReader from "./Components/AnnotationsReader";
-import TextEditor from "./Components/TextEditor";
-import JsonModal from "./Subcomponents/JsonModal";
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
+import uuid from 'react-uuid';
+import TagButton from './Subcomponents/TagButton';
+import Layout from './Layout';
+import AnnotationsReader from './Components/AnnotationsReader';
+import TextEditor from './Components/TextEditor';
+import JsonModal from './Subcomponents/JsonModal';
 
 export const ACTIONS = Object.freeze({
-  MERGE_TEXT: "merge_text",
-  ADD_TAG: "add_tag",
-  CACHE: "cache",
-  CLEAR: "clear",
+  MERGE_TEXT: 'merge_text',
+  ADD_TAG: 'add_tag',
+  CACHE: 'cache',
+  CLEAR: 'clear',
 });
 
 export const TAGS = Object.freeze({
-  PERSON: "Person",
-  ORG: "Organization",
-  PLACE: "Place",
-  EVENT: "Event",
+  PERSON: 'Person',
+  ORG: 'Organization',
+  PLACE: 'Place',
+  EVENT: 'Event',
 });
 
 export function colorByTag(tag) {
   switch (tag) {
     case TAGS.PERSON:
-      return "primary";
+      return 'primary';
     case TAGS.ORG:
-      return "link";
+      return 'link';
     case TAGS.PLACE:
-      return "warning";
+      return 'warning';
     case TAGS.EVENT:
-      return "danger";
+      return 'danger';
     default:
-      return "";
+      return '';
   }
 }
 
 const dataScheme = {
-  text: "",
+  text: '',
   tags: {
     Person: [],
     Organization: [],
@@ -57,10 +57,7 @@ function reducer(state, action) {
       return newState;
 
     case ACTIONS.ADD_TAG:
-      const newTagArray = [
-        ...state.tags[action.payload.tag],
-        action.payload.span,
-      ];
+      const newTagArray = [...state.tags[action.payload.tag], action.payload.span];
 
       newState = {
         ...state,
@@ -81,14 +78,14 @@ function reducer(state, action) {
 }
 
 function cacheData(data) {
-  localStorage.setItem("data", JSON.stringify(data));
+  localStorage.setItem('data', JSON.stringify(data));
 }
 
 // COMPONENT STARTS HERE !
 
 function App() {
-  const initialState = localStorage.getItem("data")
-    ? JSON.parse(localStorage.getItem("data"))
+  const initialState = localStorage.getItem('data')
+    ? JSON.parse(localStorage.getItem('data'))
     : dataScheme;
 
   const [data, dispatch] = useReducer(reducer, initialState);
@@ -104,7 +101,7 @@ function App() {
     active: false,
   });
   const [isModalActive, setIsModalActive] = useState(false);
-  const [jsonDisplay, setJsonDisplay] = useState("");
+  const [jsonDisplay, setJsonDisplay] = useState('');
 
   useEffect(() => {
     if (indices.start !== null && indices.start !== indices.end) {
@@ -115,8 +112,8 @@ function App() {
   }, [indices]);
 
   function handleClear(e) {
-    if (window.confirm("Are you sure you want to clear this text?")) {
-      localStorage.removeItem("data");
+    if (window.confirm('Are you sure you want to clear this text?')) {
+      localStorage.removeItem('data');
       dispatch({ type: ACTIONS.CLEAR });
     }
   }
@@ -128,7 +125,7 @@ function App() {
 
   const closeModal = useCallback(() => {
     setIsModalActive(false);
-    localStorage.removeItem("data");
+    localStorage.removeItem('data');
     dispatch({ type: ACTIONS.CLEAR });
   }, [dispatch]); // dispatch from useReducer has stable identity, so it's safe to include
 
@@ -174,11 +171,7 @@ function App() {
         <AnnotationsReader data={data} setHighlight={setHighlight} />
       </Layout>
 
-      <JsonModal
-        isActive={isModalActive}
-        jsonData={jsonDisplay}
-        onClose={closeModal}
-      />
+      <JsonModal isActive={isModalActive} jsonData={jsonDisplay} onClose={closeModal} />
     </>
   );
 }

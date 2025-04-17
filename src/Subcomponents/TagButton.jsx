@@ -1,38 +1,27 @@
-import React from 'react'
-import { ACTIONS, colorByTag } from '../App'
+import React from 'react';
+import { ACTIONS, colorByTag } from '../App';
 
-
-export default function TagButton({
-  tag,
-  dispatch,
-  indices,
-  selectionValid,
-  setIndices
-}) {
-  
+export default function TagButton({ tag, dispatch, indices, selectionValid, setIndices }) {
   return (
     <button
-    disabled={!selectionValid}
+      disabled={!selectionValid}
       className={`button m-3 is-${colorByTag(tag)}`}
-    onClick={(e) => {
-      
+      onClick={(e) => {
         dispatch({
           type: ACTIONS.ADD_TAG,
           payload: {
             tag: tag,
             span: indices,
           },
-        })
-      
-      setIndices({
-        start: null,
-        end: null
-      })
-      
+        });
+
+        setIndices({
+          start: null,
+          end: null,
+        });
       }}
     >
       {tag}
-    </button> 
-  )
-  
+    </button>
+  );
 }
