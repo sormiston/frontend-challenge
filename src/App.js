@@ -1,65 +1,66 @@
-import React, { useReducer, useState, useEffect } from 'react'
-import uuid from 'react-uuid'
-import TagButton from './Subcomponents/TagButton'
-import Layout from './Layout'
-import AnnotationsReader from './Components/AnnotationsReader'
-import TextEditor from './Components/TextEditor'
+import React, { useReducer, useState, useEffect, useCallback } from "react";
+import uuid from "react-uuid";
+import TagButton from "./Subcomponents/TagButton";
+import Layout from "./Layout";
+import AnnotationsReader from "./Components/AnnotationsReader";
+import TextEditor from "./Components/TextEditor";
+import JsonModal from "./Subcomponents/JsonModal";
 
 export const ACTIONS = Object.freeze({
-  MERGE_TEXT: 'merge_text',
-  ADD_TAG: 'add_tag',
-  CACHE: 'cache',
-  CLEAR: 'clear',
-})
+  MERGE_TEXT: "merge_text",
+  ADD_TAG: "add_tag",
+  CACHE: "cache",
+  CLEAR: "clear",
+});
 
 export const TAGS = Object.freeze({
-  PERSON: 'Person',
-  ORG: 'Organization',
-  PLACE: 'Place',
-  EVENT: 'Event',
-})
+  PERSON: "Person",
+  ORG: "Organization",
+  PLACE: "Place",
+  EVENT: "Event",
+});
 
 export function colorByTag(tag) {
   switch (tag) {
     case TAGS.PERSON:
-      return 'primary'
+      return "primary";
     case TAGS.ORG:
-      return 'link'
+      return "link";
     case TAGS.PLACE:
-      return 'warning'
+      return "warning";
     case TAGS.EVENT:
-      return 'danger'
+      return "danger";
     default:
-      return ''
+      return "";
   }
 }
 
 const dataScheme = {
-  text: '',
+  text: "",
   tags: {
     Person: [],
     Organization: [],
     Place: [],
     Event: [],
   },
-}
+};
 
 function reducer(state, action) {
-  let newState = {}
+  let newState = {};
   switch (action.type) {
     case ACTIONS.MERGE_TEXT:
       newState = {
         ...state,
         text: action.payload,
-      }
-      cacheData(newState)
-      return newState
+      };
+      cacheData(newState);
+      return newState;
 
     case ACTIONS.ADD_TAG:
       const newTagArray = [
         ...state.tags[action.payload.tag],
         action.payload.span,
-      ]
+      ];
 
       newState = {
         ...state,
@@ -67,104 +68,119 @@ function reducer(state, action) {
           ...state.tags,
           [action.payload.tag]: newTagArray,
         },
-      }
+      };
 
-      cacheData(newState)
-      return newState
+      cacheData(newState);
+      return newState;
 
     case ACTIONS.CLEAR:
-      return dataScheme
+      return dataScheme;
     default:
-      return
+      return;
   }
 }
 
 function cacheData(data) {
-  localStorage.setItem('data', JSON.stringify(data))
+  localStorage.setItem("data", JSON.stringify(data));
 }
 
 // COMPONENT STARTS HERE !
 
 function App() {
-  const initialState = localStorage.getItem('data')
-    ? JSON.parse(localStorage.getItem('data'))
-    : dataScheme
+  const initialState = localStorage.getItem("data")
+    ? JSON.parse(localStorage.getItem("data"))
+    : dataScheme;
 
-  const [data, dispatch] = useReducer(reducer, initialState)
+  const [data, dispatch] = useReducer(reducer, initialState);
   const [indices, setIndices] = useState({
     start: null,
     end: null,
-  })
-  const [selectionValid, setSelectionValid] = useState(false)
+  });
+  const [selectionValid, setSelectionValid] = useState(false);
   const [highlight, setHighlight] = useState({
     start: null,
     end: null,
     tag: null,
     active: false,
-  })
+  });
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [jsonDisplay, setJsonDisplay] = useState("");
 
   useEffect(() => {
     if (indices.start !== null && indices.start !== indices.end) {
-      setSelectionValid(true)
+      setSelectionValid(true);
     } else {
-      setSelectionValid(false)
+      setSelectionValid(false);
     }
-  }, [indices])
+  }, [indices]);
 
   function handleClear(e) {
-    if (window.confirm('Are you sure you want to clear this text?')) {
-      localStorage.removeItem('data')
-      dispatch({ type: ACTIONS.CLEAR })
+    if (window.confirm("Are you sure you want to clear this text?")) {
+      localStorage.removeItem("data");
+      dispatch({ type: ACTIONS.CLEAR });
     }
   }
 
   function save() {
-    alert(`POST request --  \n ${JSON.stringify(data, null, 2)}`)
-    localStorage.removeItem('data')
-    dispatch({ type: ACTIONS.CLEAR })
+    setJsonDisplay(JSON.stringify(data, null, 2));
+    setIsModalActive(true);
   }
 
+  const closeModal = useCallback(() => {
+    setIsModalActive(false);
+    localStorage.removeItem("data");
+    dispatch({ type: ACTIONS.CLEAR });
+  }, [dispatch]); // dispatch from useReducer has stable identity, so it's safe to include
+
   return (
-    <Layout>
-      {!!data.text ? (
-        <TextEditor
-          data={data}
-          indices={indices}
-          setIndices={setIndices}
-          handleClear={handleClear}
-          highlight={highlight}
-          setHighlight={setHighlight}
-        />
-      ) : (
-        <textarea
-          className='textarea has-fixed-size'
-          onChange={(e) => {
-            dispatch({
-              type: ACTIONS.MERGE_TEXT,
-              payload: e.target.value,
-            })
-          }}
-        />
-      )}
+    <>
+      <Layout>
+        {!!data.text ? (
+          <TextEditor
+            data={data}
+            indices={indices}
+            setIndices={setIndices}
+            handleClear={handleClear}
+            highlight={highlight}
+            setHighlight={setHighlight}
+          />
+        ) : (
+          <textarea
+            className="textarea has-fixed-size"
+            onChange={(e) => {
+              dispatch({
+                type: ACTIONS.MERGE_TEXT,
+                payload: e.target.value,
+              });
+            }}
+          />
+        )}
 
-      <button className='button' onClick={save}>
-        SAVE
-      </button>
+        <button className="button" onClick={save}>
+          SAVE
+        </button>
 
-      {Object.keys(TAGS).map((k) => (
-        <TagButton
-          key={uuid()}
-          tag={TAGS[k]}
-          dispatch={dispatch}
-          indices={indices}
-          setIndices={setIndices}
-          selectionValid={selectionValid}
-        />
-      ))}
+        {Object.keys(TAGS).map((k) => (
+          <TagButton
+            key={uuid()}
+            tag={TAGS[k]}
+            dispatch={dispatch}
+            indices={indices}
+            setIndices={setIndices}
+            selectionValid={selectionValid}
+          />
+        ))}
 
-      <AnnotationsReader data={data} setHighlight={setHighlight} />
-    </Layout>
-  )
+        <AnnotationsReader data={data} setHighlight={setHighlight} />
+      </Layout>
+
+      <JsonModal
+        isActive={isModalActive}
+        jsonData={jsonDisplay}
+        onClose={closeModal}
+      />
+    </>
+  );
 }
 
-export default App
+export default App;
