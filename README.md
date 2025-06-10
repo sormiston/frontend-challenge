@@ -8,7 +8,11 @@
 
 ## Description
 
-My recruitment coding challenge to join Priberam in May 2021.  The goal was to create an interface where text can be pasted into a workspace and annotated with 4 kinds of tag.  Tags must be allowed to overlap, for example, "The President hosted a ceremonial dinner at the White House" could have a Person tag for "President," a Place tag for "White House," and an Event tag for the entire sentence.  Work state must persist if the user reloads the page.  Clicking "Save" represents an end of workflow, by displaying a JSON object which represents a POST payload and clears local work.
+This 24 hour challenge was my coding challenge to join Priberam in May 2021.
+The goal was to create an interface where text can be pasted into a workspace and annotated with **4 kinds of tag** (Person, Place, Organization, or Event).
+Tags must be allowed to overlap, for example, "The President hosted a ceremonial dinner at the White House" could have a Person tag for "President," a Place tag for "White House," and an Event tag for the entire sentence.
+Work done must persist if the user reloads the page.
+Clicking "Save" represents an end of workflow, by displaying a JSON object which represents a payload usable in a POST HTTP request, and local work is reset.
 
 ## Project Flow
 
